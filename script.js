@@ -1,7 +1,7 @@
 let cart = [];
 let total = 0;
 
-/* AJOUT PANIER */
+/* AJOUT */
 function addToCart(name, price, id) {
   let qty = parseInt(document.getElementById("qty-" + id).value);
 
@@ -9,16 +9,13 @@ function addToCart(name, price, id) {
 
   let existing = cart.find(p => p.name === name);
 
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ name, price, qty });
-  }
+  if (existing) existing.qty += qty;
+  else cart.push({ name, price, qty });
 
   updateCart();
 }
 
-/* UPDATE PANIER */
+/* UPDATE */
 function updateCart() {
   let list = document.getElementById("cart-items");
   list.innerHTML = "";
@@ -38,45 +35,9 @@ function updateCart() {
     cart.reduce((s, i) => s + i.qty, 0);
 }
 
-/* =========================
-   💳 PAIEMENT
-========================= */
-
-function openPayment() {
-  document.getElementById("paymentModal").style.display = "block";
-}
-
-function closePayment() {
-  document.getElementById("paymentModal").style.display = "none";
-  document.getElementById("paymentForm").innerHTML = "";
-}
-
-/* CARTE BANCAIRE FAKE */
-function fakeCard() {
-  document.getElementById("paymentForm").innerHTML = `
-    <h3>Carte bancaire</h3>
-    <input placeholder="Numéro de carte (fake)">
-    <input placeholder="MM/AA">
-    <input placeholder="CVC">
-    <button onclick="fakePay()">Valider paiement</button>
-  `;
-}
-
-/* PAYPAL FAKE */
-function fakePaypal() {
-  document.getElementById("paymentForm").innerHTML = `
-    <h3>PayPal</h3>
-    <input placeholder="Email PayPal">
-    <button onclick="fakePay()">Connexion PayPal</button>
-  `;
-}
-
-/* PAIEMENT SIMULÉ */
-function fakePay() {
-  alert("Paiement réussi (fictif) ✅\nTotal : " + total.toFixed(2) + " €");
-
-  cart = [];
-  total = 0;
-  updateCart();
-  closePayment();
+/* 🔥 PASSAGE PAGE PAIEMENT */
+function goToCheckout() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("total", total);
+  window.location.href = "checkout.html";
 }
