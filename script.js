@@ -1,4 +1,4 @@
-let cart = [];
+ let cart = [];
 let total = 0;
 
 let productQty = {
@@ -7,14 +7,20 @@ let productQty = {
   sneakers: 1
 };
 
-/* ➕ / ➖ */
+/* =========================
+   + / - (FIX PRINCIPAL)
+========================= */
 function changeQty(id, value) {
-  productQty[id] += value;
+  let input = document.getElementById("qty-" + id);
 
-  if (productQty[id] < 0) productQty[id] = 0;
-  if (productQty[id] > 100) productQty[id] = 100;
+  let qty = parseInt(input.value) || 0;
+  qty += value;
 
-  document.getElementById("qty-" + id).value = productQty[id];
+  if (qty < 0) qty = 0;
+  if (qty > 100) qty = 100;
+
+  input.value = qty;
+  productQty[id] = qty;
 }
 
 /* input manuel */
@@ -25,17 +31,17 @@ function setQty(id, value) {
   if (qty < 0) qty = 0;
   if (qty > 100) qty = 100;
 
-  productQty[id] = qty;
   document.getElementById("qty-" + id).value = qty;
+  productQty[id] = qty;
 }
 
-/* ajout panier */
+/* ajouter panier */
 function addToCart(name, price, id) {
-  const qty = productQty[id];
+  let qty = productQty[id];
 
   if (qty <= 0) return;
 
-  const existing = cart.find(item => item.name === name);
+  let existing = cart.find(p => p.name === name);
 
   if (existing) {
     existing.qty += qty;
@@ -54,61 +60,54 @@ function addItem(index) {
 
 function removeItem(index) {
   cart[index].qty--;
-
-  if (cart[index].qty <= 0) {
-    cart.splice(index, 1);
-  }
-
+  if (cart[index].qty <= 0) cart.splice(index, 1);
   updateCart();
 }
 
-/* UPDATE PANIER */
+/* update panier */
 function updateCart() {
-  const list = document.getElementById("cart-items");
+  let list = document.getElementById("cart-items");
   list.innerHTML = "";
 
   total = 0;
 
-  cart.forEach((item, index) => {
+  cart.forEach((item, i) => {
     total += item.price * item.qty;
 
-    const li = document.createElement("li");
+    let li = document.createElement("li");
 
     li.innerHTML = `
-      <span>${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)} €</span>
+      <span>${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)}€</span>
       <div>
-        <button onclick="removeItem(${index})">➖</button>
-        <button onclick="addItem(${index})">➕</button>
+        <button onclick="removeItem(${i})">-</button>
+        <button onclick="addItem(${i})">+</button>
       </div>
     `;
 
     list.appendChild(li);
   });
 
-  document.getElementById("cart-count").innerText =
-    cart.reduce((sum, i) => sum + i.qty, 0);
-
   document.getElementById("total").innerText = total.toFixed(2);
+  document.getElementById("cart-count").innerText =
+    cart.reduce((s, i) => s + i.qty, 0);
 }
 
-/* FILTRES */
-function filterProducts(category) {
-  document.querySelectorAll(".product").forEach(product => {
-    const cat = product.getAttribute("data-category");
-
-    product.style.display =
-      category === "all" || cat === category ? "block" : "none";
+/* filtre */
+function filterProducts(cat) {
+  document.querySelectorAll(".product").forEach(p => {
+    p.style.display =
+      cat === "all" || p.dataset.category === cat ? "block" : "none";
   });
 }
 
-/* PAIEMENT */
+/* paiement */
 function pay() {
   if (cart.length === 0) {
-    alert("Ton panier est vide !");
+    alert("Panier vide");
     return;
   }
 
-  alert("Paiement réussi ✅\nTotal : " + total.toFixed(2) + " €");
+  alert("Paiement OK : " + total.toFixed(2) + "€");
 
   cart = [];
   total = 0;
