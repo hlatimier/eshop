@@ -9,8 +9,10 @@ function addToCart(name, price) {
 }
 
 function updateCart() {
+  // compteur
   document.getElementById("cart-count").innerText = cart.length;
 
+  // liste
   const list = document.getElementById("cart-items");
   list.innerHTML = "";
 
@@ -20,5 +22,6 @@ function updateCart() {
     list.appendChild(li);
   });
 
+  // total
   document.getElementById("total").innerText = total.toFixed(2);
 }
