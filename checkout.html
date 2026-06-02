@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Paiement</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>💳 Paiement sécurisé</h1>
+</header>
+
+<main class="checkout">
+
+  <h2>Récapitulatif commande</h2>
+
+  <div id="summary"></div>
+
+  <h3>Total : <span id="checkout-total"></span> €</h3>
+
+  <p class="warning">⚠️ Tous les paiements sont fictifs</p>
+
+  <hr>
+
+  <h3>Carte bancaire française</h3>
+  <input placeholder="Numéro de carte">
+  <input placeholder="MM/AA">
+  <input placeholder="CVC">
+
+  <button onclick="fakePay()">Payer par carte</button>
+
+  <hr>
+
+  <h3>PayPal</h3>
+  <input placeholder="Email PayPal">
+  <button onclick="fakePay()">Payer avec PayPal</button>
+
+</main>
+
+<script src="checkout.js"></script>
+</body>
+</html>
