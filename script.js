@@ -33,7 +33,7 @@ function updateCart() {
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
-/* FILTRE PRODUITS */
+/* FILTRES */
 function filterProducts(category) {
   const products = document.querySelectorAll(".product");
 
@@ -46,4 +46,18 @@ function filterProducts(category) {
       product.style.display = "none";
     }
   });
+}
+
+/* PAIEMENT */
+function pay() {
+  if (cart.length === 0) {
+    alert("Ton panier est vide !");
+    return;
+  }
+
+  alert("Paiement réussi ✅\nTotal : " + total.toFixed(2) + " €");
+
+  cart = [];
+  total = 0;
+  updateCart();
 }
