@@ -1,28 +1,36 @@
 let cart = [];
 let total = 0;
 
-// quantités produits (0 → 100)
+/* QUANTITÉS PRODUITS */
 let productQty = {
   tshirt: 1,
   casquette: 1,
   sneakers: 1
 };
 
-/* =========================
-   QUANTITÉ PRODUITS (0 - 100)
-========================= */
+/* ➕ / ➖ bouton */
 function changeQty(id, value) {
   productQty[id] += value;
 
   if (productQty[id] < 0) productQty[id] = 0;
   if (productQty[id] > 100) productQty[id] = 100;
 
-  document.getElementById("qty-" + id).innerText = productQty[id];
+  document.getElementById("qty-" + id).value = productQty[id];
 }
 
-/* =========================
-   AJOUT PANIER
-========================= */
+/* ✍️ input manuel */
+function setQty(id, value) {
+  let qty = parseInt(value);
+
+  if (isNaN(qty)) qty = 0;
+  if (qty < 0) qty = 0;
+  if (qty > 100) qty = 100;
+
+  productQty[id] = qty;
+  document.getElementById("qty-" + id).value = qty;
+}
+
+/* 🛒 ajout panier */
 function addToCart(name, price, id) {
   const qty = productQty[id];
 
@@ -39,13 +47,9 @@ function addToCart(name, price, id) {
   updateCart();
 }
 
-/* =========================
-   QUANTITÉ PANIER
-========================= */
+/* ➕ ➖ panier */
 function addItem(index) {
-  if (cart[index].qty < 100) {
-    cart[index].qty++;
-  }
+  if (cart[index].qty < 100) cart[index].qty++;
   updateCart();
 }
 
@@ -59,9 +63,7 @@ function removeItem(index) {
   updateCart();
 }
 
-/* =========================
-   UPDATE PANIER
-========================= */
+/* 🔄 update panier */
 function updateCart() {
   const list = document.getElementById("cart-items");
   list.innerHTML = "";
@@ -90,9 +92,7 @@ function updateCart() {
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
-/* =========================
-   FILTRES
-========================= */
+/* 🔎 filtres */
 function filterProducts(category) {
   document.querySelectorAll(".product").forEach(product => {
     const cat = product.getAttribute("data-category");
@@ -102,9 +102,7 @@ function filterProducts(category) {
   });
 }
 
-/* =========================
-   PAIEMENT
-========================= */
+/* 💳 paiement */
 function pay() {
   if (cart.length === 0) {
     alert("Ton panier est vide !");
