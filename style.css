@@ -98,9 +98,13 @@ main {
   cursor: pointer;
 }
 
-.qty-box span {
-  min-width: 20px;
+.qty-box input {
+  width: 50px;
+  text-align: center;
   font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px;
 }
 
 /* BOUTONS */
