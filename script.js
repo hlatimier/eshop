@@ -1,22 +1,32 @@
 let cart = [];
 let total = 0;
 
-// quantités produits avant ajout
+// quantités produits (0 → 100)
 let productQty = {
   tshirt: 1,
   casquette: 1,
   sneakers: 1
 };
 
+/* =========================
+   QUANTITÉ PRODUITS (0 - 100)
+========================= */
 function changeQty(id, value) {
   productQty[id] += value;
-  if (productQty[id] < 1) productQty[id] = 1;
+
+  if (productQty[id] < 0) productQty[id] = 0;
+  if (productQty[id] > 100) productQty[id] = 100;
 
   document.getElementById("qty-" + id).innerText = productQty[id];
 }
 
+/* =========================
+   AJOUT PANIER
+========================= */
 function addToCart(name, price, id) {
   const qty = productQty[id];
+
+  if (qty <= 0) return;
 
   const existing = cart.find(item => item.name === name);
 
@@ -29,8 +39,13 @@ function addToCart(name, price, id) {
   updateCart();
 }
 
+/* =========================
+   QUANTITÉ PANIER
+========================= */
 function addItem(index) {
-  cart[index].qty++;
+  if (cart[index].qty < 100) {
+    cart[index].qty++;
+  }
   updateCart();
 }
 
@@ -44,6 +59,9 @@ function removeItem(index) {
   updateCart();
 }
 
+/* =========================
+   UPDATE PANIER
+========================= */
 function updateCart() {
   const list = document.getElementById("cart-items");
   list.innerHTML = "";
@@ -72,7 +90,9 @@ function updateCart() {
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
-/* FILTRES */
+/* =========================
+   FILTRES
+========================= */
 function filterProducts(category) {
   document.querySelectorAll(".product").forEach(product => {
     const cat = product.getAttribute("data-category");
@@ -82,7 +102,9 @@ function filterProducts(category) {
   });
 }
 
-/* PAIEMENT */
+/* =========================
+   PAIEMENT
+========================= */
 function pay() {
   if (cart.length === 0) {
     alert("Ton panier est vide !");
