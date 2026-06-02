@@ -80,6 +80,29 @@ main {
   color: #444;
 }
 
+/* QUANTITÉ PRODUIT */
+.qty-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.qty-box button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.qty-box span {
+  min-width: 20px;
+  font-weight: bold;
+}
+
 /* BOUTONS */
 button {
   background: #28a745;
@@ -115,16 +138,11 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
-  gap: 10px;
 }
 
 .cart-box li button {
   background: #333;
   padding: 3px 6px;
-}
-
-.cart-box li button:hover {
-  background: #555;
 }
 
 .total {
