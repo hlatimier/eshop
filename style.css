@@ -56,7 +56,6 @@ main {
   gap: 15px;
 }
 
-/* PRODUIT */
 .product {
   background: white;
   border-radius: 12px;
@@ -129,6 +128,22 @@ button:hover {
 .total {
   margin-top: 10px;
   font-weight: bold;
+}
+
+/* PAYER */
+.pay-btn {
+  width: 100%;
+  margin-top: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pay-btn:hover {
+  background: #0069d9;
 }
 
 /* 📱 TABLETTE */
