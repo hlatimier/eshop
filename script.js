@@ -1,25 +1,41 @@
 let cart = [];
 let total = 0;
 
-function addToCart(name, price) {
-  const item = cart.find(p => p.name === name);
+// quantités produits avant ajout
+let productQty = {
+  tshirt: 1,
+  casquette: 1,
+  sneakers: 1
+};
 
-  if (item) {
-    item.qty += 1;
+function changeQty(id, value) {
+  productQty[id] += value;
+  if (productQty[id] < 1) productQty[id] = 1;
+
+  document.getElementById("qty-" + id).innerText = productQty[id];
+}
+
+function addToCart(name, price, id) {
+  const qty = productQty[id];
+
+  const existing = cart.find(item => item.name === name);
+
+  if (existing) {
+    existing.qty += qty;
   } else {
-    cart.push({ name, price, qty: 1 });
+    cart.push({ name, price, qty });
   }
 
   updateCart();
 }
 
 function addItem(index) {
-  cart[index].qty += 1;
+  cart[index].qty++;
   updateCart();
 }
 
 function removeItem(index) {
-  cart[index].qty -= 1;
+  cart[index].qty--;
 
   if (cart[index].qty <= 0) {
     cart.splice(index, 1);
@@ -58,9 +74,7 @@ function updateCart() {
 
 /* FILTRES */
 function filterProducts(category) {
-  const products = document.querySelectorAll(".product");
-
-  products.forEach(product => {
+  document.querySelectorAll(".product").forEach(product => {
     const cat = product.getAttribute("data-category");
 
     product.style.display =
