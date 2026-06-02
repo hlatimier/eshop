@@ -14,10 +14,8 @@ function removeFromCart(index) {
 }
 
 function updateCart() {
-  // compteur
   document.getElementById("cart-count").innerText = cart.length;
 
-  // liste
   const list = document.getElementById("cart-items");
   list.innerHTML = "";
 
@@ -26,12 +24,11 @@ function updateCart() {
 
     li.innerHTML = `
       ${item.name} - ${item.price.toFixed(2)} €
-      <button class="delete-btn" onclick="removeFromCart(${index})">❌</button>
+      <button class="delete-btn" onclick="removeFromCart(${index})">×</button>
     `;
 
     list.appendChild(li);
   });
 
-  // total
   document.getElementById("total").innerText = total.toFixed(2);
 }
