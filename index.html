@@ -2,36 +2,39 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mini e-commerce</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Boutique</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
-  <h1>Ma Boutique</h1>
-  <div id="cart">Panier : <span id="cart-count">0</span> article(s)</div>
+  <h1>🛍️ Ma Boutique</h1>
+  <div id="cart">Panier : <span id="cart-count">0</span></div>
 </header>
 
 <main>
 
+  <!-- PRODUITS -->
   <section class="products">
 
     <div class="product">
-      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400" alt="T-shirt">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80">
       <h3>T-shirt</h3>
       <p>19.99 €</p>
       <button onclick="addToCart('T-shirt', 19.99)">Ajouter</button>
     </div>
 
     <div class="product">
-      <img src="hhttps://media.winpub.fr/pub/media/iopt/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/c/a/casquette_19__1_.webp" alt="Casquette">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80">
       <h3>Casquette</h3>
       <p>14.99 €</p>
       <button onclick="addToCart('Casquette', 14.99)">Ajouter</button>
     </div>
 
     <div class="product">
-      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="Sneakers">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80">
       <h3>Sneakers</h3>
       <p>59.99 €</p>
       <button onclick="addToCart('Sneakers', 59.99)">Ajouter</button>
@@ -39,10 +42,11 @@
 
   </section>
 
+  <!-- PANIER -->
   <aside class="cart-box">
-    <h2>Panier</h2>
+    <h2>🧺 Panier</h2>
     <ul id="cart-items"></ul>
-    <p><strong>Total : <span id="total">0</span> €</strong></p>
+    <p class="total">Total : <span id="total">0</span> €</p>
   </aside>
 
 </main>
