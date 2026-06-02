@@ -33,7 +33,8 @@
 
       <div class="qty-box">
         <button onclick="changeQty('tshirt', -1)">-</button>
-        <span id="qty-tshirt">1</span>
+        <input type="number" id="qty-tshirt" value="1" min="0" max="100"
+          onchange="setQty('tshirt', this.value)">
         <button onclick="changeQty('tshirt', 1)">+</button>
       </div>
 
@@ -47,7 +48,8 @@
 
       <div class="qty-box">
         <button onclick="changeQty('casquette', -1)">-</button>
-        <span id="qty-casquette">1</span>
+        <input type="number" id="qty-casquette" value="1" min="0" max="100"
+          onchange="setQty('casquette', this.value)">
         <button onclick="changeQty('casquette', 1)">+</button>
       </div>
 
@@ -61,7 +63,8 @@
 
       <div class="qty-box">
         <button onclick="changeQty('sneakers', -1)">-</button>
-        <span id="qty-sneakers">1</span>
+        <input type="number" id="qty-sneakers" value="1" min="0" max="100"
+          onchange="setQty('sneakers', this.value)">
         <button onclick="changeQty('sneakers', 1)">+</button>
       </div>
 
