@@ -14,26 +14,33 @@
   <div id="cart">Panier : <span id="cart-count">0</span></div>
 </header>
 
+<!-- FILTRES -->
+<div class="filters">
+  <button onclick="filterProducts('all')">Tous</button>
+  <button onclick="filterProducts('vetements')">Vêtements</button>
+  <button onclick="filterProducts('shoes')">Shoes</button>
+</div>
+
 <main>
 
   <!-- PRODUITS -->
   <section class="products">
 
-    <div class="product">
+    <div class="product" data-category="vetements">
       <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80">
       <h3>T-shirt</h3>
       <p>19.99 €</p>
       <button onclick="addToCart('T-shirt', 19.99)">Ajouter</button>
     </div>
 
-    <div class="product">
+    <div class="product" data-category="vetements">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80">
       <h3>Casquette</h3>
       <p>14.99 €</p>
       <button onclick="addToCart('Casquette', 14.99)">Ajouter</button>
     </div>
 
-    <div class="product">
+    <div class="product" data-category="shoes">
       <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80">
       <h3>Sneakers</h3>
       <p>59.99 €</p>
@@ -46,7 +53,12 @@
   <aside class="cart-box">
     <h2>🧺 Panier</h2>
     <ul id="cart-items"></ul>
-    <p class="total">Total : <span id="total">0</span> €</p>
+
+    <p class="total">
+      Total : <span id="total">0</span> €
+    </p>
+
+    <button class="pay-btn" onclick="pay()">💳 Payer</button>
   </aside>
 
 </main>
