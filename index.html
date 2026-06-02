@@ -30,21 +30,42 @@
       <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80">
       <h3>T-shirt</h3>
       <p>19.99 €</p>
-      <button onclick="addToCart('T-shirt', 19.99)">Ajouter</button>
+
+      <div class="qty-box">
+        <button onclick="changeQty('tshirt', -1)">-</button>
+        <span id="qty-tshirt">1</span>
+        <button onclick="changeQty('tshirt', 1)">+</button>
+      </div>
+
+      <button onclick="addToCart('T-shirt', 19.99, 'tshirt')">Ajouter</button>
     </div>
 
     <div class="product" data-category="vetements">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80">
       <h3>Casquette</h3>
       <p>14.99 €</p>
-      <button onclick="addToCart('Casquette', 14.99)">Ajouter</button>
+
+      <div class="qty-box">
+        <button onclick="changeQty('casquette', -1)">-</button>
+        <span id="qty-casquette">1</span>
+        <button onclick="changeQty('casquette', 1)">+</button>
+      </div>
+
+      <button onclick="addToCart('Casquette', 14.99, 'casquette')">Ajouter</button>
     </div>
 
     <div class="product" data-category="shoes">
       <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80">
       <h3>Sneakers</h3>
       <p>59.99 €</p>
-      <button onclick="addToCart('Sneakers', 59.99)">Ajouter</button>
+
+      <div class="qty-box">
+        <button onclick="changeQty('sneakers', -1)">-</button>
+        <span id="qty-sneakers">1</span>
+        <button onclick="changeQty('sneakers', 1)">+</button>
+      </div>
+
+      <button onclick="addToCart('Sneakers', 59.99, 'sneakers')">Ajouter</button>
     </div>
 
   </section>
