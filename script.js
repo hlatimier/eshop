@@ -2,33 +2,56 @@ let cart = [];
 let total = 0;
 
 function addToCart(name, price) {
-  cart.push({ name, price });
-  total += price;
+  const item = cart.find(p => p.name === name);
+
+  if (item) {
+    item.qty += 1;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+
   updateCart();
 }
 
-function removeFromCart(index) {
-  total -= cart[index].price;
-  cart.splice(index, 1);
+function addItem(index) {
+  cart[index].qty += 1;
+  updateCart();
+}
+
+function removeItem(index) {
+  cart[index].qty -= 1;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
   updateCart();
 }
 
 function updateCart() {
-  document.getElementById("cart-count").innerText = cart.length;
-
   const list = document.getElementById("cart-items");
   list.innerHTML = "";
 
+  total = 0;
+
   cart.forEach((item, index) => {
+    total += item.price * item.qty;
+
     const li = document.createElement("li");
 
     li.innerHTML = `
-      ${item.name} - ${item.price.toFixed(2)} €
-      <button class="delete-btn" onclick="removeFromCart(${index})">×</button>
+      <span>${item.name} x${item.qty} - ${(item.price * item.qty).toFixed(2)} €</span>
+      <div>
+        <button onclick="removeItem(${index})">➖</button>
+        <button onclick="addItem(${index})">➕</button>
+      </div>
     `;
 
     list.appendChild(li);
   });
+
+  document.getElementById("cart-count").innerText =
+    cart.reduce((sum, i) => sum + i.qty, 0);
 
   document.getElementById("total").innerText = total.toFixed(2);
 }
@@ -40,11 +63,8 @@ function filterProducts(category) {
   products.forEach(product => {
     const cat = product.getAttribute("data-category");
 
-    if (category === "all" || cat === category) {
-      product.style.display = "block";
-    } else {
-      product.style.display = "none";
-    }
+    product.style.display =
+      category === "all" || cat === category ? "block" : "none";
   });
 }
 
