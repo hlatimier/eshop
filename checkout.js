@@ -1,26 +1,61 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let total = localStorage.getItem("total") || 0;
+const cart =
+JSON.parse(localStorage.getItem("cart")) || [];
 
-/* affichage résumé */
-function load() {
-  let div = document.getElementById("summary");
+const total =
+localStorage.getItem("total") || "0.00";
 
-  cart.forEach(item => {
-    let p = document.createElement("p");
-    p.innerText = `${item.qty} fois ${item.name}`;
-    div.appendChild(p);
-  });
+function loadSummary(){
 
-  document.getElementById("checkout-total").innerText = total;
+    const summary =
+    document.getElementById("summary");
+
+    cart.forEach(item => {
+
+        const p =
+        document.createElement("p");
+
+        p.textContent =
+        `${item.qty} fois ${item.name}`;
+
+        summary.appendChild(p);
+
+    });
+
+    document.getElementById(
+        "checkout-total"
+    ).textContent = total;
 }
 
-function fakePay() {
-  alert("Paiement réussi (fictif) ✅");
-
-  localStorage.removeItem("cart");
-  localStorage.removeItem("total");
-
-  window.location.href = "index.html";
+function clearData(){
+    localStorage.removeItem("cart");
+    localStorage.removeItem("total");
 }
 
-load();
+function fakeMastercard(){
+
+    alert("Paiement Mastercard fictif ✅");
+
+    clearData();
+
+    window.location.href = "index.html";
+}
+
+function fakeCardPayment(){
+
+    alert("Paiement carte bancaire fictif ✅");
+
+    clearData();
+
+    window.location.href = "index.html";
+}
+
+function fakePaypal(){
+
+    alert("Paiement PayPal fictif ✅");
+
+    clearData();
+
+    window.location.href = "index.html";
+}
+
+loadSummary();
