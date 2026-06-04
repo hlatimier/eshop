@@ -4,70 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paiement</title>
-<link rel="stylesheet" href="style.css">
 
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
     <h1>🛍️ Ma Boutique</h1>
-
-    <div>
-        Checkout
-    </div>
+    <div>💳 Checkout</div>
 </header>
 
 <main>
 
-    <section class="products">
+<section class="products">
 
-        <div class="checkout-box">
+    <!-- RÉSUMÉ -->
+    <div class="checkout-box">
 
-            <h2>💳 Paiement</h2>
+        <h2>Résumé de la commande</h2>
 
-            <div id="summary"></div>
+        <div id="summary"></div>
 
-            <h3>
-                Total :
-                <span id="checkout-total">0.00</span> €
-            </h3>
+        <h3>
+            Total :
+            <span id="checkout-total">0.00</span> €
+        </h3>
 
-            <p class="warning">
-                ⚠️ Tous les paiements sont fictifs
-            </p>
+        <p class="warning">
+            ⚠️ Tous les paiements sont fictifs
+        </p>
 
-        </div>
+    </div>
 
-        <div class="product">
+    <!-- MASTERCARD -->
+    <div class="product">
 
-            <h3>Carte bancaire</h3>
+        <h3>💳 Mastercard</h3>
 
-            <input type="text" placeholder="Numéro de carte">
-
+        <input type="text" placeholder="Nom sur la carte">
+        <input type="text" placeholder="Numéro Mastercard">
+        
+        <div class="card-row">
             <input type="text" placeholder="MM/AA">
-
             <input type="text" placeholder="CVC">
-
-            <button onclick="fakeCardPayment()">
-                Payer par carte
-            </button>
-
         </div>
 
-        <div class="product">
+        <button onclick="fakeMastercard()">
+            Payer avec Mastercard
+        </button>
 
-            <h3>PayPal</h3>
+    </div>
 
-            <input type="email" placeholder="Email PayPal">
+    <!-- VISA / CARTE BANCAIRE -->
+    <div class="product">
 
-            <button onclick="fakePaypalPayment()">
-                Payer avec PayPal
-            </button>
+        <h3>💳 Carte bancaire (Visa)</h3>
 
-        </div>
+        <input type="text" placeholder="Numéro de carte">
+        <input type="text" placeholder="MM/AA">
+        <input type="text" placeholder="CVC">
 
-    </section>
+        <button onclick="fakeCardPayment()">
+            Payer par carte
+        </button>
+
+    </div>
+
+    <!-- PAYPAL -->
+    <div class="product">
+
+        <h3>🅿️ PayPal</h3>
+
+        <input type="email" placeholder="Email PayPal">
+
+        <button onclick="fakePaypal()">
+            Payer avec PayPal
+        </button>
+
+    </div>
+
+</section>
 
 </main>
 
