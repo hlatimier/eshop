@@ -141,6 +141,10 @@ button:hover {
 /* =========================
    CHECKOUT (même design)
 ========================= */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
 
 .checkout-box {
     background: white;
