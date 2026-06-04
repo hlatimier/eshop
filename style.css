@@ -1,81 +1,241 @@
-body {
-  font-family: Arial;
-  margin: 0;
-  background: #f5f5f5;
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header {
-  background: #111;
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
+    background: #111;
+    color: white;
+    padding: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+/* =========================
+   LAYOUT PRINCIPAL
+========================= */
 
 main {
-  display: flex;
-  padding: 20px;
-  gap: 20px;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
 }
+
+/* =========================
+   GRILLE PRODUITS
+========================= */
 
 .products {
-  flex: 2;
+    flex: 3;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
+
+/* =========================
+   CARTE PRODUIT
+========================= */
 
 .product {
-  background: white;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 10px;
+    background: white;
+
+    border-radius: 10px;
+    padding: 15px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
 }
+
+.product img {
+    width: 100%;
+    height: 200px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+.product h3 {
+    margin-top: 10px;
+}
+
+.product p {
+    margin: 10px 0;
+}
+
+.product input {
+    width: 100%;
+    padding: 8px;
+
+    margin-bottom: 10px;
+}
+
+.product button {
+    width: 100%;
+}
+
+/* =========================
+   PANIER
+========================= */
 
 .cart-box {
-  flex: 1;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
+    flex: 1;
+
+    background: white;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+
+    height: fit-content;
 }
+
+.cart-box ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+/* =========================
+   BOUTONS
+========================= */
 
 button {
-  background: green;
-  color: white;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  margin-top: 5px;
+    background: #28a745;
+    color: white;
+
+    border: none;
+    padding: 10px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
-/* ⚠️ warning */
+button:hover {
+    opacity: .9;
+}
+
+/* bouton payer */
+.pay-btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* =========================
+   CHECKOUT BOX
+========================= */
+
+.checkout-box {
+    background: white;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.checkout-box h2 {
+    margin-bottom: 10px;
+}
+
+.checkout-box h3 {
+    margin-top: 10px;
+}
+
+.checkout-box #summary p {
+    margin: 5px 0;
+}
+
+/* =========================
+   INPUTS CHECKOUT
+========================= */
+
+.checkout-box input {
+    width: 100%;
+    padding: 10px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* =========================
+   CARTE ROW (MM/AA + CVC)
+========================= */
+
+.card-row {
+    display: flex;
+    gap: 10px;
+}
+
+.card-row input {
+    flex: 1;
+}
+
+/* =========================
+   WARNING PAIEMENT
+========================= */
+
 .warning {
-  color: red;
-  font-weight: bold;
-  margin-top: 10px;
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
+/* =========================
+   RESPONSIVE TABLETTE
+========================= */
+
+@media (max-width: 900px) {
+
+    main {
+        flex-direction: column;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.modal-content {
-  background: white;
-  width: 90%;
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-}
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
 
-.pay-options button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  background: #333;
+@media (max-width: 600px) {
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .card-row {
+        flex-direction: column;
+    }
 }
