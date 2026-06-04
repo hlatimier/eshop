@@ -1,49 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Boutique</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<div class="product">
+  <img src="images/tshirt.jpg" alt="T-shirt">
+  <h3>T-shirt</h3>
+  <p>20 €</p>
+  <input id="qty-tshirt" type="number" value="1" min="0" max="100">
+  <button onclick="addToCart('T-shirt',20,'tshirt')">
+    Ajouter
+  </button>
+</div>
 
-<body>
+<div class="product">
+  <img src="images/casquette.jpg" alt="Casquette">
+  <h3>Casquette</h3>
+  <p>15 €</p>
+  <input id="qty-casquette" type="number" value="1" min="0" max="100">
+  <button onclick="addToCart('Casquette',15,'casquette')">
+    Ajouter
+  </button>
+</div>
 
-<header>
-  <h1>🛍️ Ma Boutique</h1>
-  <div>Panier : <span id="cart-count">0</span></div>
-</header>
-
-<main>
-
-<section class="products">
-
-  <div class="product">
-    <h3>T-shirt</h3>
-    <input id="qty-tshirt" type="number" value="1" min="0" max="100">
-    <button onclick="addToCart('T-shirt',20,'tshirt')">Ajouter</button>
-  </div>
-
-  <div class="product">
-    <h3>Casquette</h3>
-    <input id="qty-casquette" type="number" value="1" min="0" max="100">
-    <button onclick="addToCart('Casquette',15,'casquette')">Ajouter</button>
-  </div>
-
-</section>
-
-<aside class="cart-box">
-  <h2>Panier</h2>
-  <ul id="cart-items"></ul>
-
-  <p>Total : <span id="total">0</span> €</p>
-
-  <!-- 🔥 redirection vers page paiement -->
-  <button onclick="goToCheckout()">💳 Payer</button>
-
-</aside>
-
-</main>
-
-<script src="script.js"></script>
-</body>
-</html>
+<div class="product">
+  <img src="images/sneakers.jpg" alt="Sneakers">
+  <h3>Sneakers</h3>
+  <p>60 €</p>
+  <input id="qty-sneakers" type="number" value="1" min="0" max="100">
+  <button onclick="addToCart('Sneakers',60,'sneakers')">
+    Ajouter
+  </button>
+</div>
