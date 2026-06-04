@@ -3,57 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>checkout</title>
+<title>Paiement</title>
 
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="checkout-container">
 
-  <h2>💳 Paiement</h2>
+<header>
+    <h1>🛍️ Ma Boutique</h1>
 
-  <div id="summary"></div>
-
-  <div class="checkout-total">
-    Total : <span id="checkout-total">0.00</span> €
-  </div>
-
-  <p class="warning">
-    ⚠️ Tous les paiements sont fictifs
-  </p>
-
-  <div class="payment-section">
-
-    <h3>Carte bancaire</h3>
-
-    <input type="text" placeholder="Nom du titulaire">
-
-    <input type="text" placeholder="Numéro de carte">
-
-    <div class="card-row">
-      <input type="text" placeholder="MM/AA">
-      <input type="text" placeholder="CVC">
+    <div>
+        Checkout
     </div>
+</header>
 
-    <button onclick="fakeCardPayment()">
-      💳 Payer par carte
-    </button>
+<main>
 
-  </div>
+    <section class="products">
 
-  <div class="payment-section">
+        <div class="checkout-box">
 
-    <h3>PayPal</h3>
+            <h2>💳 Paiement</h2>
 
-    <input type="email" placeholder="Adresse e-mail PayPal">
+            <div id="summary"></div>
 
-    <button onclick="fakePaypalPayment()">
-      🅿️ Payer avec PayPal
-    </button>
+            <h3>
+                Total :
+                <span id="checkout-total">0.00</span> €
+            </h3>
 
-  </div>
-    </body>
+            <p class="warning">
+                ⚠️ Tous les paiements sont fictifs
+            </p>
+
+        </div>
+
+        <div class="product">
+
+            <h3>Carte bancaire</h3>
+
+            <input type="text" placeholder="Numéro de carte">
+
+            <input type="text" placeholder="MM/AA">
+
+            <input type="text" placeholder="CVC">
+
+            <button onclick="fakeCardPayment()">
+                Payer par carte
+            </button>
+
+        </div>
+
+        <div class="product">
+
+            <h3>PayPal</h3>
+
+            <input type="email" placeholder="Email PayPal">
+
+            <button onclick="fakePaypalPayment()">
+                Payer avec PayPal
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="checkout.js"></script>
+
+</body>
 </html>
-
-</div>
