@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ma Boutique</title>
+<title>Paiement</title>
+
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,94 +12,83 @@
 
 <header>
     <h1>🛍️ Ma Boutique</h1>
-    <div class="cart-counter">
-        Panier : <span id="cart-count">0</span>
-    </div>
+    <div>💳 Checkout</div>
 </header>
 
 <main>
 
-    <section class="products">
+<section class="products">
 
-        <div class="product">
-            <img src="images/tshirt.jpg" alt="T-shirt">
+    <!-- RÉSUMÉ -->
+    <div class="checkout-box">
 
-            <h3>T-shirt</h3>
+        <h2>Résumé de la commande</h2>
 
-            <p>20 €</p>
-
-            <input
-                id="qty-tshirt"
-                type="number"
-                value="1"
-                min="0"
-                max="100">
-
-            <button onclick="addToCart('T-shirt',20,'tshirt')">
-                Ajouter
-            </button>
-        </div>
-
-        <div class="product">
-            <img src="images/casquette.jpg" alt="Casquette">
-
-            <h3>Casquette</h3>
-
-            <p>15 €</p>
-
-            <input
-                id="qty-casquette"
-                type="number"
-                value="1"
-                min="0"
-                max="100">
-
-            <button onclick="addToCart('Casquette',15,'casquette')">
-                Ajouter
-            </button>
-        </div>
-
-        <div class="product">
-            <img src="images/sneakers.jpg" alt="Sneakers">
-
-            <h3>Sneakers</h3>
-
-            <p>60 €</p>
-
-            <input
-                id="qty-sneakers"
-                type="number"
-                value="1"
-                min="0"
-                max="100">
-
-            <button onclick="addToCart('Sneakers',60,'sneakers')">
-                Ajouter
-            </button>
-        </div>
-
-    </section>
-
-    <aside class="cart-box">
-
-        <h2>🧺 Panier</h2>
-
-        <ul id="cart-items"></ul>
+        <div id="summary"></div>
 
         <h3>
             Total :
-            <span id="total">0.00</span> €
+            <span id="checkout-total">0.00</span> €
         </h3>
 
-        <button class="pay-btn" onclick="goToCheckout()">
-            💳 Payer
+        <p class="warning">
+            ⚠️ Tous les paiements sont fictifs
+        </p>
+
+    </div>
+
+    <!-- MASTERCARD -->
+    <div class="product">
+
+        <h3>💳 Mastercard</h3>
+
+        <input type="text" placeholder="Nom sur la carte">
+        <input type="text" placeholder="Numéro Mastercard">
+        
+        <div class="card-row">
+            <input type="text" placeholder="MM/AA">
+            <input type="text" placeholder="CVC">
+        </div>
+
+        <button onclick="fakeMastercard()">
+            Payer avec Mastercard
         </button>
 
-    </aside>
+    </div>
+
+    <!-- VISA / CARTE BANCAIRE -->
+    <div class="product">
+
+        <h3>💳 Carte bancaire (Visa)</h3>
+
+        <input type="text" placeholder="Numéro de carte">
+        <input type="text" placeholder="MM/AA">
+        <input type="text" placeholder="CVC">
+
+        <button onclick="fakeCardPayment()">
+            Payer par carte
+        </button>
+
+    </div>
+
+    <!-- PAYPAL -->
+    <div class="product">
+
+        <h3>🅿️ PayPal</h3>
+
+        <input type="email" placeholder="Email PayPal">
+
+        <button onclick="fakePaypal()">
+            Payer avec PayPal
+        </button>
+
+    </div>
+
+</section>
 
 </main>
 
-<script src="script.js"></script>
+<script src="checkout.js"></script>
 
 </body>
 </html>
