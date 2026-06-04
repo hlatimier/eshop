@@ -1,90 +1,107 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ma Boutique</title>
-  <title>Boutique</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma Boutique</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
-@@ -16,61 +15,35 @@ <h1>🛍️ Ma Boutique</h1>
+<body>
+
+<header>
+    <h1>🛍️ Ma Boutique</h1>
+    <div class="cart-counter">
+        Panier : <span id="cart-count">0</span>
+    </div>
+</header>
 
 <main>
 
-  <!-- PRODUITS -->
-  <section class="products">
-<section class="products">
+    <section class="products">
 
-    <div class="product" data-category="vetements">
-      <h3>T-shirt</h3>
-      <input id="qty-tshirt" type="number" value="1" min="0" max="100">
-      <button onclick="addToCart('T-shirt', 20, 'tshirt')">Ajouter</button>
-    </div>
-  <div class="product">
-    <h3>T-shirt</h3>
-    <input id="qty-tshirt" type="number" value="1" min="0" max="100">
-    <button onclick="addToCart('T-shirt',20,'tshirt')">Ajouter</button>
-  </div>
+        <div class="product">
+            <img src="images/tshirt.jpg" alt="T-shirt">
 
-    <div class="product" data-category="vetements">
-      <h3>Casquette</h3>
-      <input id="qty-casquette" type="number" value="1" min="0" max="100">
-      <button onclick="addToCart('Casquette', 15, 'casquette')">Ajouter</button>
-    </div>
-  <div class="product">
-    <h3>Casquette</h3>
-    <input id="qty-casquette" type="number" value="1" min="0" max="100">
-    <button onclick="addToCart('Casquette',15,'casquette')">Ajouter</button>
-  </div>
+            <h3>T-shirt</h3>
 
-  </section>
-</section>
+            <p>20 €</p>
 
-  <!-- PANIER -->
-  <aside class="cart-box">
-    <h2>🧺 Panier</h2>
-    <ul id="cart-items"></ul>
-<aside class="cart-box">
-  <h2>Panier</h2>
-  <ul id="cart-items"></ul>
+            <input
+                id="qty-tshirt"
+                type="number"
+                value="1"
+                min="0"
+                max="100">
 
-    <p>Total : <span id="total">0</span> €</p>
-  <p>Total : <span id="total">0</span> €</p>
+            <button onclick="addToCart('T-shirt',20,'tshirt')">
+                Ajouter
+            </button>
+        </div>
 
-    <button onclick="openPayment()">💳 Payer</button>
-  <!-- 🔥 redirection vers page paiement -->
-  <button onclick="goToCheckout()">💳 Payer</button>
+        <div class="product">
+            <img src="images/casquette.jpg" alt="Casquette">
 
-    <p class="warning">⚠️ Tous les paiements sont fictifs</p>
-  </aside>
-</aside>
+            <h3>Casquette</h3>
+
+            <p>15 €</p>
+
+            <input
+                id="qty-casquette"
+                type="number"
+                value="1"
+                min="0"
+                max="100">
+
+            <button onclick="addToCart('Casquette',15,'casquette')">
+                Ajouter
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="images/sneakers.jpg" alt="Sneakers">
+
+            <h3>Sneakers</h3>
+
+            <p>60 €</p>
+
+            <input
+                id="qty-sneakers"
+                type="number"
+                value="1"
+                min="0"
+                max="100">
+
+            <button onclick="addToCart('Sneakers',60,'sneakers')">
+                Ajouter
+            </button>
+        </div>
+
+    </section>
+
+    <aside class="cart-box">
+
+        <h2>🧺 Panier</h2>
+
+        <ul id="cart-items"></ul>
+
+        <h3>
+            Total :
+            <span id="total">0.00</span> €
+        </h3>
+
+        <button class="pay-btn" onclick="goToCheckout()">
+            💳 Payer
+        </button>
+
+    </aside>
 
 </main>
 
-<!-- 🔥 ÉCRAN PAIEMENT -->
-<div id="paymentModal" class="modal">
-
-  <div class="modal-content">
-
-    <h2>Paiement</h2>
-
-    <p class="warning">Tous les paiements sont fictifs</p>
-
-    <div class="pay-options">
-
-      <button onclick="fakeCard()">💳 Carte bancaire française</button>
-      <button onclick="fakePaypal()">🅿️ PayPal</button>
-
-    </div>
-
-    <div id="paymentForm"></div>
-
-    <button onclick="closePayment()">Fermer</button>
-
-  </div>
-
-</div>
-
 <script src="script.js"></script>
+
+</body>
+</html>
+
 </body>
 </html>
