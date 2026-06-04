@@ -1,102 +1,82 @@
 let cart = [];
 let total = 0;
 
-function addToCart(name, price, id){
+/* AJOUT PANIER */
+function addToCart(name, price, id) {
+  let qty = parseInt(document.getElementById("qty-" + id).value);
 
-    const qty =
-        parseInt(
-            document.getElementById(
-                "qty-" + id
-            ).value
-        ) || 0;
+  if (qty <= 0) return;
 
-    if(qty <= 0){
-        return;
-    }
+  let existing = cart.find(p => p.name === name);
 
-    const existing =
-        cart.find(
-            item => item.name === name
-        );
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ name, price, qty });
+  }
 
-    if(existing){
-
-        existing.qty += qty;
-
-    }else{
-
-        cart.push({
-            name,
-            price,
-            qty
-        });
-    }
-
-    updateCart();
+  updateCart();
 }
 
-function updateCart(){
+/* UPDATE PANIER */
+function updateCart() {
+  let list = document.getElementById("cart-items");
+  list.innerHTML = "";
 
-    const list =
-        document.getElementById(
-            "cart-items"
-        );
+  total = 0;
 
-    list.innerHTML = "";
+  cart.forEach(item => {
+    total += item.price * item.qty;
 
-    total = 0;
+    let li = document.createElement("li");
+    li.innerHTML = `${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)} €`;
+    list.appendChild(li);
+  });
 
-    cart.forEach(item => {
-
-        total +=
-            item.price * item.qty;
-
-        const li =
-            document.createElement(
-                "li"
-            );
-
-        li.textContent =
-            `${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)} €`;
-
-        list.appendChild(li);
-    });
-
-    document.getElementById(
-        "total"
-    ).textContent =
-        total.toFixed(2);
-
-    document.getElementById(
-        "cart-count"
-    ).textContent =
-        cart.reduce(
-            (sum,item)=>sum+item.qty,
-            0
-        );
+  document.getElementById("total").innerText = total.toFixed(2);
+  document.getElementById("cart-count").innerText =
+    cart.reduce((s, i) => s + i.qty, 0);
 }
 
-function goToCheckout(){
+/* =========================
+   💳 PAIEMENT
+========================= */
 
-    if(cart.length === 0){
+function openPayment() {
+  document.getElementById("paymentModal").style.display = "block";
+}
 
-        alert(
-            "Votre panier est vide."
-        );
+function closePayment() {
+  document.getElementById("paymentModal").style.display = "none";
+  document.getElementById("paymentForm").innerHTML = "";
+}
 
-        return;
-    }
+/* CARTE BANCAIRE FAKE */
+function fakeCard() {
+  document.getElementById("paymentForm").innerHTML = `
+    <h3>Carte bancaire</h3>
+    <input placeholder="Numéro de carte (fake)">
+    <input placeholder="MM/AA">
+    <input placeholder="CVC">
+    <button onclick="fakePay()">Valider paiement</button>
+  `;
+}
 
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
+/* PAYPAL FAKE */
+function fakePaypal() {
+  document.getElementById("paymentForm").innerHTML = `
+    <h3>PayPal</h3>
+    <input placeholder="Email PayPal">
+    <button onclick="fakePay()">Connexion PayPal</button>
+  `;
+}
 
-    localStorage.setItem(
-        "total",
-        total
-    );
+/* PAIEMENT SIMULÉ */
+function fakePay() {
+  alert("Paiement réussi (fictif) ✅\nTotal : " + total.toFixed(2) + " €");
 
-    window.location.href =
-        "checkout.html";
+  cart = [];
+  total = 0;
+  updateCart();
+  closePayment();
 }
