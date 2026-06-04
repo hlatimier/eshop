@@ -1,44 +1,46 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Paiement</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<div class="checkout-container">
 
-<body>
-
-<header>
-  <h1>💳 Paiement sécurisé</h1>
-</header>
-
-<main class="checkout">
-
-  <h2>Récapitulatif commande</h2>
+  <h2>💳 Paiement</h2>
 
   <div id="summary"></div>
 
-  <h3>Total : <span id="checkout-total"></span> €</h3>
+  <div class="checkout-total">
+    Total : <span id="checkout-total">0.00</span> €
+  </div>
 
-  <p class="warning">⚠️ Tous les paiements sont fictifs</p>
+  <p class="warning">
+    ⚠️ Tous les paiements sont fictifs
+  </p>
 
-  <hr>
+  <div class="payment-section">
 
-  <h3>Carte bancaire française</h3>
-  <input placeholder="Numéro de carte">
-  <input placeholder="MM/AA">
-  <input placeholder="CVC">
+    <h3>Carte bancaire</h3>
 
-  <button onclick="fakePay()">Payer par carte</button>
+    <input type="text" placeholder="Nom du titulaire">
 
-  <hr>
+    <input type="text" placeholder="Numéro de carte">
 
-  <h3>PayPal</h3>
-  <input placeholder="Email PayPal">
-  <button onclick="fakePay()">Payer avec PayPal</button>
+    <div class="card-row">
+      <input type="text" placeholder="MM/AA">
+      <input type="text" placeholder="CVC">
+    </div>
 
-</main>
+    <button onclick="fakeCardPayment()">
+      💳 Payer par carte
+    </button>
 
-<script src="checkout.js"></script>
-</body>
-</html>
+  </div>
+
+  <div class="payment-section">
+
+    <h3>PayPal</h3>
+
+    <input type="email" placeholder="Adresse e-mail PayPal">
+
+    <button onclick="fakePaypalPayment()">
+      🅿️ Payer avec PayPal
+    </button>
+
+  </div>
+
+</div>
