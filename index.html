@@ -445,27 +445,7 @@ function updateCart(){
         count;
 }
 
-function goToCheckout() {
-
-    if (cart.length === 0) {
-
-        alert("Votre panier est vide.");
-        return;
-    }
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-    localStorage.setItem(
-        "total",
-        total.toFixed(2)
-    );
-
-    window.location.href =
-        "https://hlatimier.github.io/eshop/checkout.html";
-}
+<script src="app.js"></script>
 </script>
 
 </body>
