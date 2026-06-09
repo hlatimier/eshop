@@ -1,241 +1,249 @@
-/* =========================
-   RESET
-========================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f4f6f9;
+    color:#222;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
-header {
-    background: #111;
-    color: white;
-    padding: 15px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+header{
+    background:white;
+    padding:20px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
-/* =========================
-   LAYOUT PRINCIPAL
-========================= */
-
-main {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
+.logo{
+    font-size:1.5rem;
+    font-weight:bold;
 }
 
-/* =========================
-   GRILLE PRODUITS
-========================= */
-
-.products {
-    flex: 3;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+nav{
+    display:flex;
+    gap:25px;
 }
 
-/* =========================
-   CARTE PRODUIT
-========================= */
-
-.product {
-    background: white;
-
-    border-radius: 10px;
-    padding: 15px;
-
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
 }
 
-.product img {
-    width: 100%;
-    height: 200px;
-
-    object-fit: cover;
-
-    border-radius: 8px;
+.cart-header{
+    background:#111;
+    color:white;
+    padding:10px 15px;
+    border-radius:30px;
 }
 
-.product h3 {
-    margin-top: 10px;
+/* HERO */
+
+.hero{
+    background:linear-gradient(
+    135deg,
+    #111,
+    #444
+    );
+
+    color:white;
+    text-align:center;
+    padding:80px 20px;
 }
 
-.product p {
-    margin: 10px 0;
+.hero h1{
+    font-size:3rem;
+    margin-bottom:10px;
 }
 
-.product input {
-    width: 100%;
-    padding: 8px;
-
-    margin-bottom: 10px;
+.hero p{
+    opacity:.8;
 }
 
-.product button {
-    width: 100%;
+/* SEARCH */
+
+.search-bar{
+    padding:25px;
+    text-align:center;
 }
 
-/* =========================
-   PANIER
-========================= */
-
-.cart-box {
-    flex: 1;
-
-    background: white;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
-
-    height: fit-content;
+.search-bar input{
+    width:100%;
+    max-width:600px;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:30px;
 }
 
-.cart-box ul {
-    margin: 15px 0;
-    padding-left: 20px;
+/* MAIN */
+
+main{
+    display:grid;
+    grid-template-columns:3fr 1fr;
+    gap:25px;
+    padding:30px 5%;
 }
 
-/* =========================
-   BOUTONS
-========================= */
+/* PRODUITS */
 
-button {
-    background: #28a745;
-    color: white;
-
-    border: none;
-    padding: 10px;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
+.products{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
 }
 
-button:hover {
-    opacity: .9;
+.product{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+    position:relative;
 }
 
-/* bouton payer */
-.pay-btn {
-    width: 100%;
-    margin-top: 15px;
+.product:hover{
+    transform:translateY(-8px);
 }
 
-/* =========================
-   CHECKOUT BOX
-========================= */
-
-.checkout-box {
-    background: white;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+.product img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
 }
 
-.checkout-box h2 {
-    margin-bottom: 10px;
+.product h3{
+    padding:15px;
 }
 
-.checkout-box h3 {
-    margin-top: 10px;
+.price{
+    color:#28a745;
+    font-size:1.2rem;
+    font-weight:bold;
+    padding:0 15px;
 }
 
-.checkout-box #summary p {
-    margin: 5px 0;
+.product input{
+    width:calc(100% - 30px);
+    margin:15px;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
 }
 
-/* =========================
-   INPUTS CHECKOUT
-========================= */
-
-.checkout-box input {
-    width: 100%;
-    padding: 10px;
-
-    margin-bottom: 10px;
-
-    border: 1px solid #ccc;
-    border-radius: 6px;
+.product button{
+    width:calc(100% - 30px);
+    margin:0 15px 15px;
 }
 
-/* =========================
-   CARTE ROW (MM/AA + CVC)
-========================= */
-
-.card-row {
-    display: flex;
-    gap: 10px;
+.badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#28a745;
+    color:white;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:.8rem;
 }
 
-.card-row input {
-    flex: 1;
+.promo{
+    background:#e53935;
 }
 
-/* =========================
-   WARNING PAIEMENT
-========================= */
+/* PANIER */
 
-.warning {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
+.cart-box{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    position:sticky;
+    top:100px;
+    height:fit-content;
 }
 
-/* =========================
-   RESPONSIVE TABLETTE
-========================= */
+.cart-box ul{
+    margin:20px 0;
+    padding-left:20px;
+}
 
-@media (max-width: 900px) {
+.cart-total{
+    font-size:1.3rem;
+    font-weight:bold;
+    margin:20px 0;
+}
 
-    main {
-        flex-direction: column;
+button{
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    background:#111;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.pay-btn{
+    width:100%;
+    background:#28a745;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+    main{
+        grid-template-columns:1fr;
     }
 
-    .products {
-        grid-template-columns: repeat(2, 1fr);
+    .cart-box{
+        position:static;
     }
 }
 
-/* =========================
-   RESPONSIVE MOBILE
-========================= */
+@media(max-width:768px){
 
-@media (max-width: 600px) {
-
-    .products {
-        grid-template-columns: 1fr;
+    header{
+        flex-direction:column;
+        gap:15px;
     }
 
-    header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
     }
 
-    .card-row {
-        flex-direction: column;
+    .hero h1{
+        font-size:2rem;
+    }
+}
+
+@media(max-width:480px){
+
+    .hero{
+        padding:50px 20px;
+    }
+
+    .hero h1{
+        font-size:1.6rem;
+    }
+
+    .products{
+        grid-template-columns:1fr;
     }
 }
