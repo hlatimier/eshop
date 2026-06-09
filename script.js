@@ -1,82 +1,165 @@
+// ======================
+// PANIER
+// ======================
+
 let cart = [];
 let total = 0;
 
-/* AJOUT PANIER */
+// ======================
+// AJOUTER AU PANIER
+// ======================
+
 function addToCart(name, price, id) {
-  let qty = parseInt(document.getElementById("qty-" + id).value);
 
-  if (qty <= 0) return;
+    let qty = parseInt(
+        document.getElementById(
+            "qty-" + id
+        ).value
+    );
 
-  let existing = cart.find(p => p.name === name);
+    if (!qty || qty < 1) {
+        qty = 1;
+    }
 
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ name, price, qty });
-  }
+    const existing = cart.find(
+        item => item.name === name
+    );
 
-  updateCart();
+    if (existing) {
+
+        existing.qty += qty;
+
+    } else {
+
+        cart.push({
+            name: name,
+            price: price,
+            qty: qty
+        });
+
+    }
+
+    updateCart();
 }
 
-/* UPDATE PANIER */
+// ======================
+// MISE À JOUR DU PANIER
+// ======================
+
 function updateCart() {
-  let list = document.getElementById("cart-items");
-  list.innerHTML = "";
 
-  total = 0;
+    const cartItems =
+        document.getElementById(
+            "cart-items"
+        );
 
-  cart.forEach(item => {
-    total += item.price * item.qty;
+    if (!cartItems) return;
 
-    let li = document.createElement("li");
-    li.innerHTML = `${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)} €`;
-    list.appendChild(li);
-  });
+    cartItems.innerHTML = "";
 
-  document.getElementById("total").innerText = total.toFixed(2);
-  document.getElementById("cart-count").innerText =
-    cart.reduce((s, i) => s + i.qty, 0);
+    total = 0;
+
+    let count = 0;
+
+    cart.forEach(item => {
+
+        const subtotal =
+            item.price * item.qty;
+
+        total += subtotal;
+
+        count += item.qty;
+
+        const li =
+            document.createElement(
+                "li"
+            );
+
+        li.innerHTML = `
+            <strong>${item.name}</strong><br>
+            Quantité : ${item.qty}<br>
+            ${subtotal.toFixed(2)} €
+        `;
+
+        cartItems.appendChild(li);
+
+    });
+
+    const totalElement =
+        document.getElementById(
+            "total"
+        );
+
+    if (totalElement) {
+        totalElement.textContent =
+            total.toFixed(2);
+    }
+
+    const cartCount =
+        document.getElementById(
+            "cart-count"
+        );
+
+    if (cartCount) {
+        cartCount.textContent = count;
+    }
 }
 
-/* =========================
-   💳 PAIEMENT
-========================= */
+// ======================
+// CHECKOUT
+// ======================
 
-function openPayment() {
-  document.getElementById("paymentModal").style.display = "block";
+function goToCheckout() {
+
+    if (cart.length === 0) {
+
+        alert(
+            "Votre panier est vide."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    localStorage.setItem(
+        "total",
+        total.toFixed(2)
+    );
+
+    window.location.href =
+        "https://hlatimier.github.io/eshop/checkout.html";
 }
 
-function closePayment() {
-  document.getElementById("paymentModal").style.display = "none";
-  document.getElementById("paymentForm").innerHTML = "";
-}
+// ======================
+// CHARGEMENT PAGE
+// ======================
 
-/* CARTE BANCAIRE FAKE */
-function fakeCard() {
-  document.getElementById("paymentForm").innerHTML = `
-    <h3>Carte bancaire</h3>
-    <input placeholder="Numéro de carte (fake)">
-    <input placeholder="MM/AA">
-    <input placeholder="CVC">
-    <button onclick="fakePay()">Valider paiement</button>
-  `;
-}
+window.onload = function () {
 
-/* PAYPAL FAKE */
-function fakePaypal() {
-  document.getElementById("paymentForm").innerHTML = `
-    <h3>PayPal</h3>
-    <input placeholder="Email PayPal">
-    <button onclick="fakePay()">Connexion PayPal</button>
-  `;
-}
+    const savedCart =
+        localStorage.getItem(
+            "cart"
+        );
 
-/* PAIEMENT SIMULÉ */
-function fakePay() {
-  alert("Paiement réussi (fictif) ✅\nTotal : " + total.toFixed(2) + " €");
+    if (savedCart) {
 
-  cart = [];
-  total = 0;
-  updateCart();
-  closePayment();
-}
+        try {
+
+            cart =
+                JSON.parse(
+                    savedCart
+                );
+
+            updateCart();
+
+        } catch (e) {
+
+            cart = [];
+
+        }
+    }
+};
