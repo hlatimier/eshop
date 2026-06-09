@@ -4,89 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ma Boutique</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <h1>🛍️ Ma Boutique</h1>
-    <div>
-        Panier : <span id="cart-count">0</span>
+    <div class="logo">🛍️ Ma Boutique</div>
+
+    <nav>
+        <a href="#">Accueil</a>
+        <a href="#">Boutique</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="cart-header">
+        🧺 <span id="cart-count">0</span>
     </div>
 </header>
+
+<section class="hero">
+    <h1>Nouvelle Collection 2026</h1>
+    <p>Découvrez nos meilleures offres</p>
+</section>
+
+<section class="search-bar">
+    <input type="text" placeholder="Rechercher un produit...">
+</section>
 
 <main>
 
 <section class="products">
 
-    <!-- T-SHIRT -->
     <div class="product">
 
-        <img
-        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
-        alt="T-shirt">
+        <span class="badge">Nouveau</span>
 
-        <h3>T-shirt</h3>
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80">
 
-        <p>20 €</p>
+        <h3>T-shirt Premium</h3>
 
-        <input
-        id="qty-tshirt"
-        type="number"
-        value="1"
-        min="0"
-        max="100">
+        <p class="price">20 €</p>
 
-        <button onclick="addToCart('T-shirt',20,'tshirt')">
-            Ajouter
+        <input id="qty-tshirt" type="number" value="1" min="1">
+
+        <button onclick="addToCart('T-shirt Premium',20,'tshirt')">
+            Ajouter au panier
         </button>
 
     </div>
 
-    <!-- CASQUETTE -->
     <div class="product">
 
-        <img
-        src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80"
-        alt="Casquette">
+        <img src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80">
 
         <h3>Casquette</h3>
 
-        <p>15 €</p>
+        <p class="price">15 €</p>
 
-        <input
-        id="qty-casquette"
-        type="number"
-        value="1"
-        min="0"
-        max="100">
+        <input id="qty-casquette" type="number" value="1" min="1">
 
         <button onclick="addToCart('Casquette',15,'casquette')">
-            Ajouter
+            Ajouter au panier
         </button>
 
     </div>
 
-    <!-- SNEAKERS -->
     <div class="product">
 
-        <img
-        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
-        alt="Sneakers">
+        <span class="badge promo">Promo</span>
+
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80">
 
         <h3>Sneakers</h3>
 
-        <p>60 €</p>
+        <p class="price">60 €</p>
 
-        <input
-        id="qty-sneakers"
-        type="number"
-        value="1"
-        min="0"
-        max="100">
+        <input id="qty-sneakers" type="number" value="1" min="1">
 
         <button onclick="addToCart('Sneakers',60,'sneakers')">
-            Ajouter
+            Ajouter au panier
         </button>
 
     </div>
@@ -95,127 +93,23 @@
 
 <aside class="cart-box">
 
-    <h2>🧺 Panier</h2>
+    <h2>🧺 Votre panier</h2>
 
     <ul id="cart-items"></ul>
 
-    <h3>
-        Total :
-        <span id="total">0.00</span> €
-    </h3>
+    <div class="cart-total">
+        Total : <span id="total">0.00</span> €
+    </div>
 
-    <button
-    class="pay-btn"
-    onclick="goToCheckout()">
-        💳 Payer
+    <button class="pay-btn" onclick="goToCheckout()">
+        💳 Commander
     </button>
 
 </aside>
 
 </main>
 
-<script>
-let cart = [];
-let total = 0;
-
-function addToCart(name, price, id){
-
-    const qty =
-        parseInt(
-            document.getElementById(
-                "qty-" + id
-            ).value
-        ) || 0;
-
-    if(qty <= 0){
-        return;
-    }
-
-    const existing =
-        cart.find(
-            item => item.name === name
-        );
-
-    if(existing){
-        existing.qty += qty;
-    }
-    else{
-        cart.push({
-            name,
-            price,
-            qty
-        });
-    }
-
-    updateCart();
-}
-
-function updateCart(){
-
-    const list =
-        document.getElementById(
-            "cart-items"
-        );
-
-    list.innerHTML = "";
-
-    total = 0;
-
-    cart.forEach(item => {
-
-        total +=
-            item.price * item.qty;
-
-        const li =
-            document.createElement(
-                "li"
-            );
-
-        li.textContent =
-            `${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)} €`;
-
-        list.appendChild(li);
-    });
-
-    document.getElementById(
-        "total"
-    ).textContent =
-        total.toFixed(2);
-
-    document.getElementById(
-        "cart-count"
-    ).textContent =
-        cart.reduce(
-            (sum,item)=>sum+item.qty,
-            0
-        );
-}
-
-function goToCheckout(){
-
-    if(cart.length === 0){
-
-        alert(
-            "Votre panier est vide."
-        );
-
-        return;
-    }
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-    localStorage.setItem(
-        "total",
-        total
-    );
-
-    window.location.href =
-        "checkout.html";
-}
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
