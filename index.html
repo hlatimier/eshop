@@ -3,338 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Ma Boutique</title>
-<link rel="stylesheet" href="style.css">
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Segoe UI',sans-serif;
-    background:#f4f6f9;
-    color:#333;
-}
-
-/* HEADER */
-
-header{
-    background:white;
-    padding:20px 5%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-.logo{
-    font-size:1.8rem;
-    font-weight:bold;
-}
-
-.cart-header{
-    background:#111;
-    color:white;
-    padding:10px 18px;
-    border-radius:25px;
-    font-weight:bold;
-}
-
-/* HERO */
-
-.hero{
-    background:linear-gradient(135deg,#111,#444);
-    color:white;
-    text-align:center;
-    padding:80px 20px;
-}
-
-.hero h1{
-    font-size:3rem;
-    margin-bottom:10px;
-}
-
-.hero p{
-    opacity:.9;
-}
-
-/* MAIN */
-
-main{
-    display:grid;
-    grid-template-columns:3fr 1fr;
-    gap:25px;
-    padding:30px 5%;
-}
-
-/* PRODUITS */
-
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-}
-
-.product{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.product:hover{
-    transform:translateY(-6px);
-}
-
-.product img{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-}
-
-.product-content{
-    padding:15px;
-}
-
-.product h3{
-    margin-bottom:10px;
-}
-
-.price{
-    color:#28a745;
-    font-size:1.3rem;
-    font-weight:bold;
-    margin-bottom:15px;
-}
-
-.qty-container{
-    margin-bottom:15px;
-}
-
-.qty-container label{
-    display:block;
-    margin-bottom:5px;
-}
-
-.qty-container input{
-    width:100%;
-    padding:10px;
-    border:1px solid #ddd;
-    border-radius:8px;
-}
-
-.product button{
-    width:100%;
-    background:#111;
-    color:white;
-    border:none;
-    padding:12px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:1rem;
-}
-
-.product button:hover{
-    background:#333;
-}
-
-/* PANIER */
-
-.cart-box{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    position:sticky;
-    top:90px;
-    height:fit-content;
-}
-
-.cart-box h2{
-    margin-bottom:15px;
-}
-
-.cart-box ul{
-    list-style:none;
-}
-
-.cart-box li{
-    margin-bottom:10px;
-    padding-bottom:10px;
-    border-bottom:1px solid #eee;
-}
-
-.total{
-    margin-top:20px;
-    font-size:1.3rem;
-    font-weight:bold;
-}
-
-.pay-btn{
-    width:100%;
-    margin-top:20px;
-    background:#28a745;
-    color:white;
-    border:none;
-    padding:14px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:1rem;
-}
-
-.pay-btn:hover{
-    background:#21913b;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    main{
-        grid-template-columns:1fr;
-    }
-
-    .cart-box{
-        position:static;
-    }
-}
-
-@media(max-width:600px){
-
-    header{
-        flex-direction:column;
-        gap:10px;
-    }
-
-    .hero h1{
-        font-size:2rem;
-    }
-}
-
-</style>
 </head>
 
 <body>
 
 <header>
-
-    <div class="logo">
-        🛍️ Ma Boutique
-    </div>
-
-    <div class="cart-header">
+    <h1>🛍️ Ma Boutique</h1>
+    <div>
         Panier : <span id="cart-count">0</span>
     </div>
-
 </header>
-
-<section class="hero">
-
-    <h1>Nouvelle Collection</h1>
-
-    <p>Découvrez nos produits phares</p>
-
-</section>
 
 <main>
 
 <section class="products">
 
-    <!-- TSHIRT -->
-
+    <!-- T-SHIRT -->
     <div class="product">
 
-        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80">
+        <img
+        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
+        alt="T-shirt">
 
-        <div class="product-content">
+        <h3>T-shirt</h3>
 
-            <h3>T-shirt Premium</h3>
+        <p>20 €</p>
 
-            <div class="price">20 €</div>
+        <input
+        id="qty-tshirt"
+        type="number"
+        value="1"
+        min="0"
+        max="100">
 
-            <div class="qty-container">
-                <label>Quantité</label>
-                <input
-                    type="number"
-                    id="qty-tshirt"
-                    value="1"
-                    min="1"
-                    max="99">
-            </div>
-
-            <button onclick="addToCart('T-shirt Premium',20,'tshirt')">
-                Ajouter au panier
-            </button>
-
-        </div>
+        <button onclick="addToCart('T-shirt',20,'tshirt')">
+            Ajouter
+        </button>
 
     </div>
 
     <!-- CASQUETTE -->
-
     <div class="product">
 
-        <img src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80">
+        <img
+        src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80"
+        alt="Casquette">
 
-        <div class="product-content">
+        <h3>Casquette</h3>
 
-            <h3>Casquette</h3>
+        <p>15 €</p>
 
-            <div class="price">15 €</div>
+        <input
+        id="qty-casquette"
+        type="number"
+        value="1"
+        min="0"
+        max="100">
 
-            <div class="qty-container">
-                <label>Quantité</label>
-                <input
-                    type="number"
-                    id="qty-casquette"
-                    value="1"
-                    min="1"
-                    max="99">
-            </div>
-
-            <button onclick="addToCart('Casquette',15,'casquette')">
-                Ajouter au panier
-            </button>
-
-        </div>
+        <button onclick="addToCart('Casquette',15,'casquette')">
+            Ajouter
+        </button>
 
     </div>
 
     <!-- SNEAKERS -->
-
     <div class="product">
 
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80">
+        <img
+        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+        alt="Sneakers">
 
-        <div class="product-content">
+        <h3>Sneakers</h3>
 
-            <h3>Sneakers</h3>
+        <p>60 €</p>
 
-            <div class="price">60 €</div>
+        <input
+        id="qty-sneakers"
+        type="number"
+        value="1"
+        min="0"
+        max="100">
 
-            <div class="qty-container">
-                <label>Quantité</label>
-                <input
-                    type="number"
-                    id="qty-sneakers"
-                    value="1"
-                    min="1"
-                    max="99">
-            </div>
-
-            <button onclick="addToCart('Sneakers',60,'sneakers')">
-                Ajouter au panier
-            </button>
-
-        </div>
+        <button onclick="addToCart('Sneakers',60,'sneakers')">
+            Ajouter
+        </button>
 
     </div>
 
@@ -342,18 +95,19 @@ main{
 
 <aside class="cart-box">
 
-    <h2>🧺 Votre panier</h2>
+    <h2>🧺 Panier</h2>
 
     <ul id="cart-items"></ul>
 
-    <div class="total">
-        Total : <span id="total">0.00</span> €
-    </div>
+    <h3>
+        Total :
+        <span id="total">0.00</span> €
+    </h3>
 
     <button
-        class="pay-btn"
-        onclick="goToCheckout()">
-        💳 Commander
+    class="pay-btn"
+    onclick="goToCheckout()">
+        💳 Payer
     </button>
 
 </aside>
@@ -361,21 +115,20 @@ main{
 </main>
 
 <script>
-
 let cart = [];
 let total = 0;
 
 function addToCart(name, price, id){
 
-    let qty =
+    const qty =
         parseInt(
             document.getElementById(
                 "qty-" + id
             ).value
-        );
+        ) || 0;
 
-    if(!qty || qty < 1){
-        qty = 1;
+    if(qty <= 0){
+        return;
     }
 
     const existing =
@@ -384,17 +137,14 @@ function addToCart(name, price, id){
         );
 
     if(existing){
-
         existing.qty += qty;
-
-    }else{
-
+    }
+    else{
         cart.push({
-            name:name,
-            price:price,
-            qty:qty
+            name,
+            price,
+            qty
         });
-
     }
 
     updateCart();
@@ -402,36 +152,29 @@ function addToCart(name, price, id){
 
 function updateCart(){
 
-    const cartItems =
+    const list =
         document.getElementById(
             "cart-items"
         );
 
-    cartItems.innerHTML = "";
+    list.innerHTML = "";
 
     total = 0;
 
-    let count = 0;
+    cart.forEach(item => {
 
-    cart.forEach(item=>{
-
-        const subtotal =
+        total +=
             item.price * item.qty;
 
-        total += subtotal;
-
-        count += item.qty;
-
         const li =
-            document.createElement("li");
+            document.createElement(
+                "li"
+            );
 
-        li.innerHTML =
-            `<strong>${item.name}</strong><br>
-            Quantité : ${item.qty}<br>
-            ${subtotal.toFixed(2)} €`;
+        li.textContent =
+            `${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)} €`;
 
-        cartItems.appendChild(li);
-
+        list.appendChild(li);
     });
 
     document.getElementById(
@@ -442,14 +185,20 @@ function updateCart(){
     document.getElementById(
         "cart-count"
     ).textContent =
-        count;
+        cart.reduce(
+            (sum,item)=>sum+item.qty,
+            0
+        );
 }
 
-function goToCheckout() {
+function goToCheckout(){
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
 
-        alert("Votre panier est vide.");
+        alert(
+            "Votre panier est vide."
+        );
+
         return;
     }
 
@@ -460,13 +209,13 @@ function goToCheckout() {
 
     localStorage.setItem(
         "total",
-        total.toFixed(2)
+        total
     );
 
     window.location.href =
-        "https://hlatimier.github.io/eshop/checkout.html";
+        "checkout.html";
 }
-<script src="app.js"></script>
 </script>
 
 </body>
+</html>
