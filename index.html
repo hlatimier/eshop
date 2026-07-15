@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -220,3 +221,252 @@ main{
 
 </style>
 </head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🛍️ Ma Boutique
+    </div>
+
+    <div class="cart-header">
+        Panier : <span id="cart-count">0</span>
+    </div>
+
+</header>
+
+<section class="hero">
+
+    <h1>Nouvelle Collection</h1>
+
+    <p>Découvrez nos produits phares</p>
+
+</section>
+
+<main>
+
+<section class="products">
+
+    <!-- TSHIRT -->
+
+    <div class="product">
+
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80">
+
+        <div class="product-content">
+
+            <h3>T-shirt Premium</h3>
+
+            <div class="price">20 €</div>
+
+            <div class="qty-container">
+                <label>Quantité</label>
+                <input
+                    type="number"
+                    id="qty-tshirt"
+                    value="1"
+                    min="1"
+                    max="99">
+            </div>
+
+            <button onclick="addToCart('T-shirt Premium',20,'tshirt')">
+                Ajouter au panier
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- CASQUETTE -->
+
+    <div class="product">
+
+        <img src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80">
+
+        <div class="product-content">
+
+            <h3>Casquette</h3>
+
+            <div class="price">15 €</div>
+
+            <div class="qty-container">
+                <label>Quantité</label>
+                <input
+                    type="number"
+                    id="qty-casquette"
+                    value="1"
+                    min="1"
+                    max="99">
+            </div>
+
+            <button onclick="addToCart('Casquette',15,'casquette')">
+                Ajouter au panier
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- SNEAKERS -->
+
+    <div class="product">
+
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80">
+
+        <div class="product-content">
+
+            <h3>Sneakers</h3>
+
+            <div class="price">60 €</div>
+
+            <div class="qty-container">
+                <label>Quantité</label>
+                <input
+                    type="number"
+                    id="qty-sneakers"
+                    value="1"
+                    min="1"
+                    max="99">
+            </div>
+
+            <button onclick="addToCart('Sneakers',60,'sneakers')">
+                Ajouter au panier
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<aside class="cart-box">
+
+    <h2>🧺 Votre panier</h2>
+
+    <ul id="cart-items"></ul>
+
+    <div class="total">
+        Total : <span id="total">0.00</span> €
+    </div>
+
+    <button
+        class="pay-btn"
+        onclick="goToCheckout()">
+        💳 Commander
+    </button>
+
+</aside>
+
+</main>
+
+<script>
+
+let cart = [];
+let total = 0;
+
+function addToCart(name, price, id){
+
+    let qty =
+        parseInt(
+            document.getElementById(
+                "qty-" + id
+            ).value
+        );
+
+    if(!qty || qty < 1){
+        qty = 1;
+    }
+
+    const existing =
+        cart.find(
+            item => item.name === name
+        );
+
+    if(existing){
+
+        existing.qty += qty;
+
+    }else{
+
+        cart.push({
+            name:name,
+            price:price,
+            qty:qty
+        });
+
+    }
+
+    updateCart();
+}
+
+function updateCart(){
+
+    const cartItems =
+        document.getElementById(
+            "cart-items"
+        );
+
+    cartItems.innerHTML = "";
+
+    total = 0;
+
+    let count = 0;
+
+    cart.forEach(item=>{
+
+        const subtotal =
+            item.price * item.qty;
+
+        total += subtotal;
+
+        count += item.qty;
+
+        const li =
+            document.createElement("li");
+
+        li.innerHTML =
+            `<strong>${item.name}</strong><br>
+            Quantité : ${item.qty}<br>
+            ${subtotal.toFixed(2)} €`;
+
+        cartItems.appendChild(li);
+
+    });
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        total.toFixed(2);
+
+    document.getElementById(
+        "cart-count"
+    ).textContent =
+        count;
+}
+
+function goToCheckout() {
+
+    if (cart.length === 0) {
+
+        alert("Votre panier est vide.");
+        return;
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    localStorage.setItem(
+        "total",
+        total.toFixed(2)
+    );
+
+    window.location.href =
+        "https://hlatimier.github.io/eshop/checkout.html";
+}
+<script src="app.js"></script>
+</script>
+
+</body>
