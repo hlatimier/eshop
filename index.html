@@ -34,13 +34,42 @@
 
 <section class="hero">
 
-    <h1>Nouvelle Collection</h1>
+    <h1>
+        Nouvelle Collection
+    </h1>
 
     <p>
         Découvrez nos produits phares
     </p>
 
 </section>
+
+
+
+
+<!-- FILTRE CATEGORIES -->
+
+<div class="filters">
+
+    <button onclick="filterProducts('all')">
+        Tous
+    </button>
+
+    <button onclick="filterProducts('vetements')">
+        👕 Vêtements
+    </button>
+
+    <button onclick="filterProducts('shoes')">
+        👟 Shoes
+    </button>
+
+    <button onclick="filterProducts('accessoires')">
+        🧢 Accessoires
+    </button>
+
+</div>
+
+
 
 
 
@@ -55,12 +84,12 @@
 
 <!-- T-SHIRT -->
 
-<div class="product">
+<div class="product" data-category="vetements">
 
 
-<img 
+<img
 src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
-alt="T-shirt Premium">
+alt="T-shirt">
 
 
 <div class="product-content">
@@ -74,6 +103,7 @@ T-shirt Premium
 <div class="price">
 20 €
 </div>
+
 
 
 <div class="qty-container">
@@ -93,6 +123,7 @@ max="99">
 </div>
 
 
+
 <button onclick="addToCart('T-shirt Premium',20,'tshirt')">
 
 Ajouter au panier
@@ -102,7 +133,11 @@ Ajouter au panier
 
 </div>
 
+
 </div>
+
+
+
 
 
 
@@ -111,7 +146,7 @@ Ajouter au panier
 <!-- CASQUETTE -->
 
 
-<div class="product">
+<div class="product" data-category="accessoires">
 
 
 <img
@@ -135,7 +170,6 @@ Casquette
 
 <div class="qty-container">
 
-
 <label>
 Quantité
 </label>
@@ -147,7 +181,6 @@ id="qty-casquette"
 value="1"
 min="1"
 max="99">
-
 
 </div>
 
@@ -162,7 +195,10 @@ Ajouter au panier
 
 </div>
 
+
 </div>
+
+
 
 
 
@@ -172,7 +208,7 @@ Ajouter au panier
 <!-- SNEAKERS -->
 
 
-<div class="product">
+<div class="product" data-category="shoes">
 
 
 <img
@@ -188,14 +224,15 @@ Sneakers
 </h3>
 
 
+
 <div class="price">
 60 €
 </div>
 
 
 
-<div class="qty-container">
 
+<div class="qty-container">
 
 <label>
 Quantité
@@ -208,7 +245,6 @@ id="qty-sneakers"
 value="1"
 min="1"
 max="99">
-
 
 </div>
 
@@ -223,7 +259,9 @@ Ajouter au panier
 
 </div>
 
+
 </div>
+
 
 
 
@@ -247,11 +285,9 @@ Ajouter au panier
 </h2>
 
 
-
 <ul id="cart-items">
 
 </ul>
-
 
 
 
@@ -267,7 +303,6 @@ Total :
 
 
 
-
 <button
 class="clear-btn"
 onclick="clearCart()">
@@ -275,7 +310,6 @@ onclick="clearCart()">
 🗑️ Vider le panier
 
 </button>
-
 
 
 
