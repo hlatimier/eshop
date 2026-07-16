@@ -1,13 +1,19 @@
 // =========================
-// PANIER
+// VARIABLES
 // =========================
 
 
 let cart = [];
 
+let currentCategory = "all";
 
 
-// Charger le panier sauvegardé
+
+
+// =========================
+// CHARGER LE PANIER
+// =========================
+
 
 function loadCart(){
 
@@ -28,8 +34,10 @@ function loadCart(){
 
 
 
+// =========================
+// SAUVEGARDER LE PANIER
+// =========================
 
-// Sauvegarder le panier
 
 function saveCart(){
 
@@ -44,7 +52,7 @@ function saveCart(){
 
 
 // =========================
-// AJOUT PRODUIT
+// AJOUTER AU PANIER
 // =========================
 
 
@@ -67,7 +75,7 @@ function addToCart(name, price, id){
 
 
 
-    const product =
+    let product =
     cart.find(
         item => item.name === name
     );
@@ -76,12 +84,11 @@ function addToCart(name, price, id){
 
     if(product){
 
-
         product.qty += qty;
 
+    }
 
-    }else{
-
+    else{
 
         cart.push({
 
@@ -93,7 +100,6 @@ function addToCart(name, price, id){
 
         });
 
-
     }
 
 
@@ -101,7 +107,6 @@ function addToCart(name, price, id){
     saveCart();
 
     updateCart();
-
 
 }
 
@@ -147,7 +152,7 @@ function updateCart(){
 
 
 
-        const li =
+        let li =
         document.createElement(
             "li"
         );
@@ -156,7 +161,9 @@ function updateCart(){
 
         li.innerHTML = `
 
-        <strong>${item.name}</strong><br>
+        <strong>${item.name}</strong>
+
+        <br>
 
         ${item.price} € x ${item.qty}
 
@@ -194,12 +201,10 @@ function updateCart(){
 
 
 
-
     document.getElementById(
         "total"
     ).textContent =
     total.toFixed(2);
-
 
 
 
@@ -220,14 +225,14 @@ function updateCart(){
 
 
 // =========================
-// AUGMENTER QUANTITE
+// + QUANTITE
 // =========================
 
 
 function increaseQty(index){
 
 
-    if(cart[index].qty < 99){
+    if(cart[index].qty < 100){
 
         cart[index].qty++;
 
@@ -236,15 +241,13 @@ function increaseQty(index){
 
     updateCart();
 
-
 }
 
 
 
 
-
 // =========================
-// DIMINUER QUANTITE
+// - QUANTITE
 // =========================
 
 
@@ -253,15 +256,12 @@ function decreaseQty(index){
 
     if(cart[index].qty > 1){
 
-
         cart[index].qty--;
-
 
     }
 
 
     updateCart();
-
 
 }
 
@@ -270,7 +270,7 @@ function decreaseQty(index){
 
 
 // =========================
-// SUPPRIMER PRODUIT
+// SUPPRIMER
 // =========================
 
 
@@ -281,7 +281,6 @@ function removeProduct(index){
 
 
     updateCart();
-
 
 }
 
@@ -300,15 +299,15 @@ function clearCart(){
     cart=[];
 
 
-    updateCart();
-
-
     localStorage.removeItem(
         "cart"
     );
 
 
+    updateCart();
+
 }
+
 
 
 
@@ -322,7 +321,6 @@ function clearCart(){
 function goToCheckout(){
 
 
-
     if(cart.length === 0){
 
 
@@ -333,22 +331,160 @@ function goToCheckout(){
 
         return;
 
-
     }
-
-
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
 
 
 
     window.location.href =
     "checkout.html";
 
+
 }
+
+
+
+
+
+// =========================
+// FILTRE CATEGORIES
+// =========================
+
+
+function filterProducts(category){
+
+
+    currentCategory = category;
+
+
+    applyFilters();
+
+
+}
+
+
+
+
+
+
+
+// =========================
+// RECHERCHE
+// =========================
+
+
+function searchProducts(){
+
+
+    applyFilters();
+
+
+}
+
+
+
+
+
+
+// =========================
+// APPLICATION FILTRES + RECHERCHE
+// =========================
+
+
+function applyFilters(){
+
+
+
+    const searchInput =
+    document.getElementById(
+        "search"
+    );
+
+
+
+    let searchValue = "";
+
+
+
+    if(searchInput){
+
+        searchValue =
+        searchInput.value.toLowerCase();
+
+    }
+
+
+
+
+
+    const products =
+    document.querySelectorAll(
+        ".product"
+    );
+
+
+
+
+
+    products.forEach(product=>{
+
+
+        const name =
+        product
+        .querySelector("h3")
+        .textContent
+        .toLowerCase();
+
+
+
+        const category =
+        product.dataset.category;
+
+
+
+        const searchMatch =
+        name.includes(searchValue);
+
+
+
+        const categoryMatch =
+        currentCategory === "all"
+        ||
+        category === currentCategory;
+
+
+
+
+
+        if(
+            searchMatch
+            &&
+            categoryMatch
+        ){
+
+
+            product.style.display =
+            "block";
+
+
+        }
+
+        else{
+
+
+            product.style.display =
+            "none";
+
+
+        }
+
+
+
+    });
+
+
+
+}
+
 
 
 
