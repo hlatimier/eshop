@@ -1,82 +1,362 @@
+// =========================
+// PANIER
+// =========================
+
+
 let cart = [];
-let total = 0;
 
-/* AJOUT PANIER */
-function addToCart(name, price, id) {
-  let qty = parseInt(document.getElementById("qty-" + id).value);
 
-  if (qty <= 0) return;
 
-  let existing = cart.find(p => p.name === name);
+// Charger le panier sauvegardé
 
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ name, price, qty });
-  }
+function loadCart(){
 
-  updateCart();
+    const savedCart =
+    localStorage.getItem("cart");
+
+
+    if(savedCart){
+
+        cart = JSON.parse(savedCart);
+
+    }
+
+
+    updateCart();
+
 }
 
-/* UPDATE PANIER */
-function updateCart() {
-  let list = document.getElementById("cart-items");
-  list.innerHTML = "";
 
-  total = 0;
 
-  cart.forEach(item => {
-    total += item.price * item.qty;
 
-    let li = document.createElement("li");
-    li.innerHTML = `${item.qty} fois ${item.name} - ${(item.price * item.qty).toFixed(2)} €`;
-    list.appendChild(li);
-  });
+// Sauvegarder le panier
 
-  document.getElementById("total").innerText = total.toFixed(2);
-  document.getElementById("cart-count").innerText =
-    cart.reduce((s, i) => s + i.qty, 0);
+function saveCart(){
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
 }
 
-/* =========================
-   💳 PAIEMENT
-========================= */
 
-function openPayment() {
-  document.getElementById("paymentModal").style.display = "block";
+
+
+// =========================
+// AJOUT PRODUIT
+// =========================
+
+
+function addToCart(name, price, id){
+
+
+    let qty =
+    parseInt(
+        document.getElementById(
+            "qty-" + id
+        ).value
+    );
+
+
+    if(!qty || qty < 1){
+
+        qty = 1;
+
+    }
+
+
+
+    const product =
+    cart.find(
+        item => item.name === name
+    );
+
+
+
+    if(product){
+
+
+        product.qty += qty;
+
+
+    }else{
+
+
+        cart.push({
+
+            name:name,
+
+            price:price,
+
+            qty:qty
+
+        });
+
+
+    }
+
+
+
+    saveCart();
+
+    updateCart();
+
+
 }
 
-function closePayment() {
-  document.getElementById("paymentModal").style.display = "none";
-  document.getElementById("paymentForm").innerHTML = "";
+
+
+
+// =========================
+// AFFICHAGE PANIER
+// =========================
+
+
+function updateCart(){
+
+
+    const list =
+    document.getElementById(
+        "cart-items"
+    );
+
+
+    list.innerHTML="";
+
+
+
+    let total = 0;
+
+    let count = 0;
+
+
+
+    cart.forEach((item,index)=>{
+
+
+        let subtotal =
+        item.price * item.qty;
+
+
+
+        total += subtotal;
+
+
+        count += item.qty;
+
+
+
+        const li =
+        document.createElement(
+            "li"
+        );
+
+
+
+        li.innerHTML = `
+
+        <strong>${item.name}</strong><br>
+
+        ${item.price} € x ${item.qty}
+
+        <br>
+
+        Sous-total :
+        ${subtotal.toFixed(2)} €
+
+        <br><br>
+
+
+        <button onclick="decreaseQty(${index})">
+        -
+        </button>
+
+
+        <button onclick="increaseQty(${index})">
+        +
+        </button>
+
+
+        <button onclick="removeProduct(${index})">
+        ❌
+        </button>
+
+        `;
+
+
+
+        list.appendChild(li);
+
+
+
+    });
+
+
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+    total.toFixed(2);
+
+
+
+
+    document.getElementById(
+        "cart-count"
+    ).textContent =
+    count;
+
+
+
+    saveCart();
+
+
 }
 
-/* CARTE BANCAIRE FAKE */
-function fakeCard() {
-  document.getElementById("paymentForm").innerHTML = `
-    <h3>Carte bancaire</h3>
-    <input placeholder="Numéro de carte (fake)">
-    <input placeholder="MM/AA">
-    <input placeholder="CVC">
-    <button onclick="fakePay()">Valider paiement</button>
-  `;
+
+
+
+
+// =========================
+// AUGMENTER QUANTITE
+// =========================
+
+
+function increaseQty(index){
+
+
+    if(cart[index].qty < 99){
+
+        cart[index].qty++;
+
+    }
+
+
+    updateCart();
+
+
 }
 
-/* PAYPAL FAKE */
-function fakePaypal() {
-  document.getElementById("paymentForm").innerHTML = `
-    <h3>PayPal</h3>
-    <input placeholder="Email PayPal">
-    <button onclick="fakePay()">Connexion PayPal</button>
-  `;
+
+
+
+
+// =========================
+// DIMINUER QUANTITE
+// =========================
+
+
+function decreaseQty(index){
+
+
+    if(cart[index].qty > 1){
+
+
+        cart[index].qty--;
+
+
+    }
+
+
+    updateCart();
+
+
 }
 
-/* PAIEMENT SIMULÉ */
-function fakePay() {
-  alert("Paiement réussi (fictif) ✅\nTotal : " + total.toFixed(2) + " €");
 
-  cart = [];
-  total = 0;
-  updateCart();
-  closePayment();
+
+
+
+// =========================
+// SUPPRIMER PRODUIT
+// =========================
+
+
+function removeProduct(index){
+
+
+    cart.splice(index,1);
+
+
+    updateCart();
+
+
 }
+
+
+
+
+
+// =========================
+// VIDER PANIER
+// =========================
+
+
+function clearCart(){
+
+
+    cart=[];
+
+
+    updateCart();
+
+
+    localStorage.removeItem(
+        "cart"
+    );
+
+
+}
+
+
+
+
+
+// =========================
+// CHECKOUT
+// =========================
+
+
+function goToCheckout(){
+
+
+
+    if(cart.length === 0){
+
+
+        alert(
+            "Votre panier est vide"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+
+
+    window.location.href =
+    "checkout.html";
+
+}
+
+
+
+
+
+// =========================
+// DEMARRAGE
+// =========================
+
+
+loadCart();
