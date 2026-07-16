@@ -1,165 +1,438 @@
-// ======================
-// PANIER
-// ======================
+// =========================
+// INITIALISATION PANIER
+// =========================
+
 
 let cart = [];
-let total = 0;
 
-// ======================
-// AJOUTER AU PANIER
-// ======================
 
-function addToCart(name, price, id) {
 
-    let qty = parseInt(
-        document.getElementById(
-            "qty-" + id
-        ).value
-    );
+// =========================
+// CHARGEMENT DU PANIER
+// =========================
 
-    if (!qty || qty < 1) {
-        qty = 1;
-    }
 
-    const existing = cart.find(
-        item => item.name === name
-    );
+function loadCart(){
 
-    if (existing) {
+    const saved =
+    localStorage.getItem("cart");
 
-        existing.qty += qty;
 
-    } else {
+    if(saved){
 
-        cart.push({
-            name: name,
-            price: price,
-            qty: qty
-        });
+        cart = JSON.parse(saved);
 
     }
+
 
     updateCart();
+
 }
 
-// ======================
-// MISE À JOUR DU PANIER
-// ======================
 
-function updateCart() {
 
-    const cartItems =
-        document.getElementById(
-            "cart-items"
-        );
 
-    if (!cartItems) return;
+// =========================
+// SAUVEGARDE
+// =========================
 
-    cartItems.innerHTML = "";
 
-    total = 0;
-
-    let count = 0;
-
-    cart.forEach(item => {
-
-        const subtotal =
-            item.price * item.qty;
-
-        total += subtotal;
-
-        count += item.qty;
-
-        const li =
-            document.createElement(
-                "li"
-            );
-
-        li.innerHTML = `
-            <strong>${item.name}</strong><br>
-            Quantité : ${item.qty}<br>
-            ${subtotal.toFixed(2)} €
-        `;
-
-        cartItems.appendChild(li);
-
-    });
-
-    const totalElement =
-        document.getElementById(
-            "total"
-        );
-
-    if (totalElement) {
-        totalElement.textContent =
-            total.toFixed(2);
-    }
-
-    const cartCount =
-        document.getElementById(
-            "cart-count"
-        );
-
-    if (cartCount) {
-        cartCount.textContent = count;
-    }
-}
-
-// ======================
-// CHECKOUT
-// ======================
-
-function goToCheckout() {
-
-    if (cart.length === 0) {
-
-        alert(
-            "Votre panier est vide."
-        );
-
-        return;
-    }
+function saveCart(){
 
     localStorage.setItem(
         "cart",
         JSON.stringify(cart)
     );
 
-    localStorage.setItem(
-        "total",
-        total.toFixed(2)
-    );
-
-    window.location.href =
-        "https://hlatimier.github.io/eshop/checkout.html";
 }
 
-// ======================
-// CHARGEMENT PAGE
-// ======================
 
-window.onload = function () {
 
-    const savedCart =
-        localStorage.getItem(
-            "cart"
+
+
+// =========================
+// AJOUTER AU PANIER
+// =========================
+
+
+function addToCart(name, price, id){
+
+
+    let qty =
+    parseInt(
+        document.getElementById(
+            "qty-" + id
+        ).value
+    );
+
+
+
+    if(!qty || qty < 1){
+
+        qty = 1;
+
+    }
+
+
+
+    let product =
+    cart.find(
+        item => item.name === name
+    );
+
+
+
+    if(product){
+
+
+        product.qty += qty;
+
+
+    }else{
+
+
+        cart.push({
+
+            name:name,
+
+            price:price,
+
+            qty:qty
+
+        });
+
+
+    }
+
+
+
+    saveCart();
+
+    updateCart();
+
+
+}
+
+
+
+
+
+// =========================
+// AFFICHER LE PANIER
+// =========================
+
+
+function updateCart(){
+
+
+
+    const list =
+    document.getElementById(
+        "cart-items"
+    );
+
+
+    list.innerHTML = "";
+
+
+
+    let total = 0;
+
+    let count = 0;
+
+
+
+
+    cart.forEach(
+    (item,index)=>{
+
+
+        let subtotal =
+        item.price * item.qty;
+
+
+
+        total += subtotal;
+
+
+        count += item.qty;
+
+
+
+        const li =
+        document.createElement(
+            "li"
         );
 
-    if (savedCart) {
 
-        try {
 
-            cart =
-                JSON.parse(
-                    savedCart
-                );
+        li.innerHTML = `
 
-            updateCart();
+        <strong>
+        ${item.name}
+        </strong>
 
-        } catch (e) {
 
-            cart = [];
+        <br>
+
+
+        ${item.price} € x ${item.qty}
+
+
+        <br>
+
+
+        Sous-total :
+        ${subtotal.toFixed(2)} €
+
+
+        <br><br>
+
+
+        <button onclick="decreaseQty(${index})">
+        -
+        </button>
+
+
+        <button onclick="increaseQty(${index})">
+        +
+        </button>
+
+
+        <button onclick="removeProduct(${index})">
+        ❌
+        </button>
+
+
+        `;
+
+
+
+        list.appendChild(li);
+
+
+
+    });
+
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+    total.toFixed(2);
+
+
+
+
+    document.getElementById(
+        "cart-count"
+    ).textContent =
+    count;
+
+
+
+    saveCart();
+
+
+}
+
+
+
+
+
+
+
+// =========================
+// AUGMENTER QUANTITE
+// =========================
+
+
+function increaseQty(index){
+
+
+    if(cart[index].qty < 100){
+
+        cart[index].qty++;
+
+    }
+
+
+    updateCart();
+
+
+}
+
+
+
+
+
+// =========================
+// DIMINUER QUANTITE
+// =========================
+
+
+function decreaseQty(index){
+
+
+    if(cart[index].qty > 1){
+
+        cart[index].qty--;
+
+    }
+
+
+    updateCart();
+
+
+}
+
+
+
+
+
+
+
+// =========================
+// SUPPRIMER PRODUIT
+// =========================
+
+
+function removeProduct(index){
+
+
+    cart.splice(index,1);
+
+
+    updateCart();
+
+
+}
+
+
+
+
+
+
+
+// =========================
+// VIDER LE PANIER
+// =========================
+
+
+function clearCart(){
+
+
+    cart=[];
+
+
+    localStorage.removeItem(
+        "cart"
+    );
+
+
+    updateCart();
+
+
+}
+
+
+
+
+
+// =========================
+// ALLER AU CHECKOUT
+// =========================
+
+
+function goToCheckout(){
+
+
+    if(cart.length === 0){
+
+
+        alert(
+            "Votre panier est vide"
+        );
+
+
+        return;
+
+    }
+
+
+
+    window.location.href =
+    "checkout.html";
+
+
+}
+
+
+
+
+
+
+
+// =========================
+// FILTRE CATEGORIES
+// =========================
+
+
+function filterProducts(category){
+
+
+
+    const products =
+    document.querySelectorAll(
+        ".product"
+    );
+
+
+
+    products.forEach(product=>{
+
+
+        const productCategory =
+        product.dataset.category;
+
+
+
+        if(
+            category === "all"
+            ||
+            productCategory === category
+        ){
+
+
+            product.style.display =
+            "block";
+
+
+        }else{
+
+
+            product.style.display =
+            "none";
+
 
         }
-    }
-};
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+// =========================
+// DEMARRAGE
+// =========================
+
+
+loadCart();
