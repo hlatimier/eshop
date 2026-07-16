@@ -21,6 +21,7 @@ body{
 
 
 
+
 /* =========================
    HEADER
 ========================= */
@@ -38,7 +39,8 @@ header{
 
     align-items:center;
 
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    box-shadow:
+    0 2px 10px rgba(0,0,0,.08);
 
     position:sticky;
 
@@ -49,6 +51,7 @@ header{
 }
 
 
+
 .logo{
 
     font-size:1.8rem;
@@ -56,6 +59,7 @@ header{
     font-weight:bold;
 
 }
+
 
 
 
@@ -76,6 +80,7 @@ header{
 
 
 
+
 /* =========================
    HERO
 ========================= */
@@ -83,7 +88,8 @@ header{
 
 .hero{
 
-    background:linear-gradient(135deg,#111,#444);
+    background:
+    linear-gradient(135deg,#111,#444);
 
     color:white;
 
@@ -116,6 +122,64 @@ header{
 
 
 /* =========================
+   FILTRES
+========================= */
+
+
+.filters{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    padding:30px 5% 0;
+
+}
+
+
+
+.filters button{
+
+
+    background:white;
+
+    color:#111;
+
+    border:1px solid #ddd;
+
+    padding:12px 22px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+
+
+.filters button:hover{
+
+    background:#111;
+
+    color:white;
+
+}
+
+
+
+
+
+
+
+/* =========================
    MAIN
 ========================= */
 
@@ -131,6 +195,8 @@ main{
     padding:30px 5%;
 
 }
+
+
 
 
 
@@ -178,7 +244,6 @@ main{
 
 
 
-
 .product img{
 
     width:100%;
@@ -188,7 +253,6 @@ main{
     object-fit:cover;
 
 }
-
 
 
 
@@ -224,6 +288,7 @@ main{
 
 
 
+
 /* =========================
    QUANTITE
 ========================= */
@@ -249,6 +314,7 @@ main{
 
 .qty-container input{
 
+
     width:100%;
 
     padding:10px;
@@ -264,24 +330,15 @@ main{
 
 
 
+
+
 /* =========================
-   BOUTONS
+   BOUTONS PRODUITS
 ========================= */
 
 
-button{
-
-    cursor:pointer;
-
-    border:none;
-
-    transition:.2s;
-
-}
-
-
-
 .product button{
+
 
     width:100%;
 
@@ -289,9 +346,13 @@ button{
 
     color:white;
 
+    border:none;
+
     padding:12px;
 
     border-radius:8px;
+
+    cursor:pointer;
 
     font-size:1rem;
 
@@ -319,22 +380,16 @@ button{
 
     background:white;
 
-
     padding:20px;
 
-
     border-radius:15px;
-
 
     box-shadow:
     0 5px 15px rgba(0,0,0,.08);
 
-
     position:sticky;
 
-
     top:90px;
-
 
     height:fit-content;
 
@@ -350,7 +405,6 @@ button{
 
 
 
-
 .cart-box ul{
 
     list-style:none;
@@ -361,27 +415,23 @@ button{
 
 .cart-box li{
 
-
     padding:12px 0;
 
+    border-bottom:
 
-    border-bottom:1px solid #eee;
+    1px solid #eee;
 
 }
 
 
 
-/* boutons dans panier */
 
 
 .total{
 
-
     margin-top:20px;
 
-
     font-size:1.3rem;
-
 
     font-weight:bold;
 
@@ -390,29 +440,32 @@ button{
 
 
 
+
+/* =========================
+   BOUTONS PANIER
+========================= */
+
+
 .clear-btn{
 
 
     width:100%;
 
-
     margin-top:15px;
-
 
     background:#dc3545;
 
-
     color:white;
 
+    border:none;
 
     padding:12px;
 
-
     border-radius:8px;
 
+    cursor:pointer;
 
 }
-
 
 
 
@@ -425,30 +478,26 @@ button{
 
 
 
-
 .pay-btn{
 
 
     width:100%;
 
-
     margin-top:10px;
-
 
     background:#28a745;
 
-
     color:white;
 
+    border:none;
 
     padding:14px;
 
-
     border-radius:8px;
 
+    cursor:pointer;
 
     font-size:1rem;
-
 
 }
 
@@ -463,69 +512,9 @@ button{
 
 
 
-/* =========================
-   CHECKOUT PREPARATION
-========================= */
-
-
-.checkout-box{
-
-
-    background:white;
-
-
-    padding:20px;
-
-
-    border-radius:15px;
-
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,.08);
-
-}
-
-
-
-
-
-.card-row{
-
-
-    display:flex;
-
-
-    gap:10px;
-
-}
-
-
-
-
-.card-row input{
-
-    flex:1;
-
-}
-
-
-
-
-
-.warning{
-
-    color:red;
-
-    font-weight:bold;
-
-}
-
-
-
-
 
 /* =========================
-   TABLETTE
+   RESPONSIVE TABLETTE
 ========================= */
 
 
@@ -539,13 +528,11 @@ button{
     }
 
 
-
     .cart-box{
 
         position:static;
 
     }
-
 
 }
 
@@ -553,8 +540,10 @@ button{
 
 
 
+
+
 /* =========================
-   MOBILE
+   RESPONSIVE MOBILE
 ========================= */
 
 
@@ -563,12 +552,11 @@ button{
 
     header{
 
-
         flex-direction:column;
-
 
         gap:10px;
 
+        text-align:center;
 
     }
 
@@ -576,9 +564,25 @@ button{
 
     .hero h1{
 
-
         font-size:2rem;
 
+    }
+
+
+
+
+    .filters{
+
+        padding:20px;
+
+    }
+
+
+
+
+    .filters button{
+
+        width:100%;
 
     }
 
@@ -586,19 +590,7 @@ button{
 
     main{
 
-
         padding:20px;
-
-
-    }
-
-
-
-    .card-row{
-
-
-        flex-direction:column;
-
 
     }
 
