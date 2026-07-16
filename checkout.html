@@ -1,94 +1,298 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiement</title>
 
-<link rel="stylesheet" href="style.css">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Paiement - Ma Boutique</title>
+
+
+<link rel="stylesheet" href="checkout.css">
+
+
 </head>
+
 
 <body>
 
+
+
 <header>
-    <h1>🛍️ Ma Boutique</h1>
-    <div>💳 Checkout</div>
+
+
+<div class="logo">
+🛍️ Ma Boutique
+</div>
+
+
+<div class="cart-header">
+
+💳 Paiement
+
+</div>
+
+
 </header>
 
-<main>
 
-<section class="products">
 
-    <!-- RÉSUMÉ -->
-    <div class="checkout-box">
 
-        <h2>Résumé de la commande</h2>
 
-        <div id="summary"></div>
+<section class="hero">
 
-        <h3>
-            Total :
-            <span id="checkout-total">0.00</span> €
-        </h3>
 
-        <p class="warning">
-            ⚠️ Tous les paiements sont fictifs
-        </p>
+<h1>
+Finaliser votre commande
+</h1>
 
-    </div>
 
-    <!-- MASTERCARD -->
-    <div class="product">
+<p>
+Merci pour votre achat
+</p>
 
-        <h3>💳 Mastercard</h3>
-
-        <input type="text" placeholder="Nom sur la carte">
-        <input type="text" placeholder="Numéro Mastercard">
-        
-        <div class="card-row">
-            <input type="text" placeholder="MM/AA">
-            <input type="text" placeholder="CVC">
-        </div>
-
-        <button onclick="fakeMastercard()">
-            Payer avec Mastercard
-        </button>
-
-    </div>
-
-    <!-- VISA / CARTE BANCAIRE -->
-    <div class="product">
-
-        <h3>💳 Carte bancaire (Visa)</h3>
-
-        <input type="text" placeholder="Numéro de carte">
-        <input type="text" placeholder="MM/AA">
-        <input type="text" placeholder="CVC">
-
-        <button onclick="fakeCardPayment()">
-            Payer par carte
-        </button>
-
-    </div>
-
-    <!-- PAYPAL -->
-    <div class="product">
-
-        <h3>🅿️ PayPal</h3>
-
-        <input type="email" placeholder="Email PayPal">
-
-        <button onclick="fakePaypal()">
-            Payer avec PayPal
-        </button>
-
-    </div>
 
 </section>
 
+
+
+
+
+
+
+<main>
+
+
+
+<section class="checkout-grid">
+
+
+
+
+
+
+<!-- RESUME -->
+
+
+<div class="checkout-box">
+
+
+<h2>
+🧺 Votre commande
+</h2>
+
+
+
+<div id="summary">
+
+</div>
+
+
+
+<div class="total">
+
+Total :
+<span id="checkout-total">
+0.00
+</span>
+€
+
+</div>
+
+
+
+<p class="warning">
+
+⚠️ Tous les paiements sont fictifs
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- PAIEMENT -->
+
+
+<div class="checkout-box">
+
+
+
+<h2>
+💳 Paiement
+</h2>
+
+
+
+
+
+<div class="payment-card">
+
+
+
+<h3>
+💳 Mastercard
+</h3>
+
+
+
+<input
+type="text"
+placeholder="Nom sur la carte">
+
+
+
+<input
+type="text"
+placeholder="Numéro Mastercard">
+
+
+
+
+
+<div class="card-row">
+
+
+<input
+type="text"
+placeholder="MM/AA">
+
+
+<input
+type="text"
+placeholder="CVC">
+
+
+</div>
+
+
+
+
+
+<button onclick="fakePayment('Mastercard')">
+
+Payer avec Mastercard
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="payment-card">
+
+
+<h3>
+💳 Carte bancaire
+</h3>
+
+
+
+<input
+type="text"
+placeholder="Numéro de carte">
+
+
+<input
+type="text"
+placeholder="Date expiration">
+
+
+<input
+type="text"
+placeholder="Cryptogramme">
+
+
+
+<button onclick="fakePayment('Carte bancaire')">
+
+Payer par carte
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="payment-card">
+
+
+<h3>
+🅿️ PayPal
+</h3>
+
+
+
+<input
+type="email"
+placeholder="Email PayPal">
+
+
+
+
+
+<button onclick="fakePayment('PayPal')">
+
+Payer avec PayPal
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
 </main>
+
+
+
+
+
 
 <script src="checkout.js"></script>
 
+
+
 </body>
+
+
 </html>
