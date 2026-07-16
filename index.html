@@ -361,91 +361,65 @@ main{
 </main>
 
 <script>
-
 let cart = [];
-let total = 0;
 
-function addToCart(name, price, id){
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
-    let qty =
-        parseInt(
-            document.getElementById(
-                "qty-" + id
-            ).value
-        );
-
-    if(!qty || qty < 1){
-        qty = 1;
+function loadCart() {
+    const saved = localStorage.getItem("cart");
+    if (saved) {
+        cart = JSON.parse(saved);
     }
-
-    const existing =
-        cart.find(
-            item => item.name === name
-        );
-
-    if(existing){
-
-        existing.qty += qty;
-
-    }else{
-
-        cart.push({
-            name:name,
-            price:price,
-            qty:qty
-        });
-
-    }
-
     updateCart();
 }
 
-function updateCart(){
+function addToCart(name, price, id) {
 
-    const cartItems =
-        document.getElementById(
-            "cart-items"
-        );
+    const qty = parseInt(document.getElementById("qty-" + id).value) || 1;
 
-    cartItems.innerHTML = "";
+    if (qty <= 0) return;
 
-    total = 0;
+    const product = cart.find(item => item.name === name);
 
-    let count = 0;
+    if (product) {
+        product.qty += qty;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            qty: qty
+        });
+    }
 
-    cart.forEach(item=>{
-
-        const subtotal =
-            item.price * item.qty;
-
-        total += subtotal;
-
-        count += item.qty;
-
-        const li =
-            document.createElement("li");
-
-        li.innerHTML =
-            `<strong>${item.name}</strong><br>
-            Quantité : ${item.qty}<br>
-            ${subtotal.toFixed(2)} €`;
-
-        cartItems.appendChild(li);
-
-    });
-
-    document.getElementById(
-        "total"
-    ).textContent =
-        total.toFixed(2);
-
-    document.getElementById(
-        "cart-count"
-    ).textContent =
-        count;
+    saveCart();
+    updateCart();
 }
 
-<script src="app.js"></script>
+function removeFromCart(index) {
+    cart.splice(index, 1);
+
+    saveCart();
+    updateCart();
+}
+
+function updateCart() {
+
+    const list = document.getElementById("cart-items");
+
+    list.innerHTML = "";
+
+    let total = 0;
+    let nbArticles = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.price * item.qty;
+        nbArticles += item.qty;
+
+        const li = document.createElement("li");
+
 </script>
 
 </body>
