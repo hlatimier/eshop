@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Ma Boutique</title>
@@ -18,56 +19,109 @@
 
 <header>
 
-    <div class="logo">
-        🛍️ Ma Boutique
-    </div>
+<div class="logo">
+🛍️ Ma Boutique
+</div>
 
 
-    <div class="cart-header">
-        Panier :
-        <span id="cart-count">0</span>
-    </div>
+<div class="cart-header">
+
+Panier :
+<span id="cart-count">0</span>
+
+</div>
 
 </header>
 
 
 
+
+
 <section class="hero">
 
-    <h1>
-        Nouvelle Collection
-    </h1>
+<h1>
+Nouvelle Collection
+</h1>
 
-    <p>
-        Découvrez nos produits phares
-    </p>
+
+<p>
+Découvrez nos produits phares
+</p>
+
 
 </section>
 
 
 
 
-<!-- FILTRE CATEGORIES -->
+
+<!-- RECHERCHE -->
+
+
+<div class="search-box">
+
+
+<input
+
+type="text"
+
+id="search"
+
+placeholder="🔍 Rechercher un produit..."
+
+onkeyup="searchProducts()"
+
+
+>
+
+
+</div>
+
+
+
+
+
+<!-- CATEGORIES -->
+
 
 <div class="filters">
 
-    <button onclick="filterProducts('all')">
-        Tous
-    </button>
 
-    <button onclick="filterProducts('vetements')">
-        👕 Vêtements
-    </button>
+<button onclick="filterProducts('all')">
 
-    <button onclick="filterProducts('shoes')">
-        👟 Shoes
-    </button>
+Tous
 
-    <button onclick="filterProducts('accessoires')">
-        🧢 Accessoires
-    </button>
+</button>
+
+
+
+<button onclick="filterProducts('vetements')">
+
+👕 Vêtements
+
+</button>
+
+
+
+<button onclick="filterProducts('shoes')">
+
+👟 Shoes
+
+</button>
+
+
+
+<button onclick="filterProducts('accessoires')">
+
+🧢 Accessoires
+
+</button>
+
+
 
 </div>
+
+
 
 
 
@@ -82,14 +136,21 @@
 
 
 
-<!-- T-SHIRT -->
+
+
+<!-- PRODUIT 1 -->
+
 
 <div class="product" data-category="vetements">
 
 
 <img
-src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
-alt="T-shirt">
+
+src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
+
+alt="T-shirt Premium"
+
+>
 
 
 <div class="product-content">
@@ -100,6 +161,7 @@ T-shirt Premium
 </h3>
 
 
+
 <div class="price">
 20 €
 </div>
@@ -108,17 +170,26 @@ T-shirt Premium
 
 <div class="qty-container">
 
+
 <label>
 Quantité
 </label>
 
 
 <input
+
 type="number"
+
 id="qty-tshirt"
+
 value="1"
+
 min="1"
-max="99">
+
+max="99"
+
+>
+
 
 </div>
 
@@ -143,15 +214,21 @@ Ajouter au panier
 
 
 
-<!-- CASQUETTE -->
+
+<!-- PRODUIT 2 -->
 
 
 <div class="product" data-category="accessoires">
 
 
 <img
-src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80"
-alt="Casquette">
+
+src="https://images.unsplash.com/photo-1521369909029-2afed882baee"
+
+alt="Casquette"
+
+>
+
 
 
 <div class="product-content">
@@ -162,13 +239,16 @@ Casquette
 </h3>
 
 
+
 <div class="price">
 15 €
 </div>
 
 
 
+
 <div class="qty-container">
+
 
 <label>
 Quantité
@@ -176,13 +256,23 @@ Quantité
 
 
 <input
+
 type="number"
+
 id="qty-casquette"
+
 value="1"
+
 min="1"
-max="99">
+
+max="99"
+
+>
+
+
 
 </div>
+
 
 
 
@@ -193,27 +283,34 @@ Ajouter au panier
 </button>
 
 
-</div>
-
 
 </div>
 
 
+</div>
 
 
 
 
 
 
-<!-- SNEAKERS -->
+
+
+
+<!-- PRODUIT 3 -->
 
 
 <div class="product" data-category="shoes">
 
 
 <img
-src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
-alt="Sneakers">
+
+src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+
+alt="Sneakers"
+
+>
+
 
 
 <div class="product-content">
@@ -226,7 +323,9 @@ Sneakers
 
 
 <div class="price">
+
 60 €
+
 </div>
 
 
@@ -234,19 +333,31 @@ Sneakers
 
 <div class="qty-container">
 
+
 <label>
+
 Quantité
+
 </label>
 
 
 <input
+
 type="number"
+
 id="qty-sneakers"
+
 value="1"
+
 min="1"
-max="99">
+
+max="99"
+
+>
+
 
 </div>
+
 
 
 
@@ -274,6 +385,8 @@ Ajouter au panier
 
 
 
+
+
 <!-- PANIER -->
 
 
@@ -285,27 +398,39 @@ Ajouter au panier
 </h2>
 
 
+
 <ul id="cart-items">
 
 </ul>
 
 
 
+
 <div class="total">
 
 Total :
+
 <span id="total">
+
 0.00
+
 </span>
+
 €
 
 </div>
 
 
 
+
+
 <button
+
 class="clear-btn"
-onclick="clearCart()">
+
+onclick="clearCart()"
+
+>
 
 🗑️ Vider le panier
 
@@ -313,9 +438,15 @@ onclick="clearCart()">
 
 
 
+
+
 <button
+
 class="pay-btn"
-onclick="goToCheckout()">
+
+onclick="goToCheckout()"
+
+>
 
 💳 Commander
 
@@ -328,6 +459,7 @@ onclick="goToCheckout()">
 
 
 </main>
+
 
 
 
