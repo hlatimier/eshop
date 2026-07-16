@@ -1,61 +1,177 @@
-const cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+// =========================
+// RECUPERATION DU PANIER
+// =========================
 
-const total =
-localStorage.getItem("total") || "0.00";
 
-function loadSummary(){
+let cart = 
+JSON.parse(
+    localStorage.getItem("cart")
+) || [];
+
+
+
+
+// =========================
+// AFFICHAGE COMMANDE
+// =========================
+
+
+function loadOrder(){
+
 
     const summary =
-    document.getElementById("summary");
+    document.getElementById(
+        "summary"
+    );
+
+
+    let total = 0;
+
+
+
+    summary.innerHTML = "";
+
+
 
     cart.forEach(item => {
 
-        const p =
-        document.createElement("p");
 
-        p.textContent =
-        `${item.qty} fois ${item.name}`;
+        const subtotal =
+        item.price * item.qty;
+
+
+
+        total += subtotal;
+
+
+
+        const p =
+        document.createElement(
+            "p"
+        );
+
+
+        p.innerHTML = `
+
+        <strong>
+        ${item.name}
+        </strong>
+        <br>
+
+        Quantité :
+        ${item.qty}
+
+        <br>
+
+        Prix :
+        ${subtotal.toFixed(2)} €
+
+        `;
+
+
 
         summary.appendChild(p);
 
+
+
     });
+
+
+
 
     document.getElementById(
         "checkout-total"
-    ).textContent = total;
+    ).textContent =
+    total.toFixed(2);
+
+
 }
 
-function clearData(){
-    localStorage.removeItem("cart");
-    localStorage.removeItem("total");
+
+
+
+
+// =========================
+// PAIEMENT FICTIF
+// =========================
+
+
+function fakePayment(method){
+
+
+
+    if(cart.length === 0){
+
+
+        alert(
+            "Votre panier est vide."
+        );
+
+
+        window.location.href =
+        "index.html";
+
+
+        return;
+
+
+    }
+
+
+
+    alert(
+
+        "Paiement " 
+        + method
+        +
+        " effectué avec succès !\n\n"
+        +
+        "⚠️ Paiement fictif"
+
+    );
+
+
+
+
+
+    clearOrder();
+
+
+
 }
 
-function fakeMastercard(){
 
-    alert("Paiement Mastercard fictif ✅");
 
-    clearData();
 
-    window.location.href = "index.html";
+
+// =========================
+// SUPPRESSION COMMANDE
+// =========================
+
+
+function clearOrder(){
+
+
+
+    localStorage.removeItem(
+        "cart"
+    );
+
+
+
+    window.location.href =
+    "index.html";
+
+
 }
 
-function fakeCardPayment(){
 
-    alert("Paiement carte bancaire fictif ✅");
 
-    clearData();
 
-    window.location.href = "index.html";
-}
 
-function fakePaypal(){
+// =========================
+// LANCEMENT
+// =========================
 
-    alert("Paiement PayPal fictif ✅");
 
-    clearData();
-
-    window.location.href = "index.html";
-}
-
-loadSummary();
+loadOrder();
