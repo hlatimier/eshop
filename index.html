@@ -3,13 +3,13 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ma Boutique</title>
+    <title>Ma Boutique</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -17,453 +17,340 @@
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-<div class="logo">
-🛍️ Ma Boutique
-</div>
+    <div class="logo">
+        🛍️ Ma Boutique
+    </div>
 
-
-<div class="cart-header">
-
-Panier :
-<span id="cart-count">0</span>
-
-</div>
+    <div class="cart-header">
+        Panier :
+        <span id="cart-count">0</span>
+    </div>
 
 </header>
 
 
 
-
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<h1>
-Nouvelle Collection
-</h1>
+    <h1>
+        Nouvelle Collection
+    </h1>
 
-
-<p>
-Découvrez nos produits phares
-</p>
-
+    <p>
+        Découvrez nos produits phares
+    </p>
 
 </section>
 
 
 
-
-
-<!-- RECHERCHE -->
-
+<!-- =========================
+     RECHERCHE
+========================= -->
 
 <div class="search-box">
 
-
-<input
-
-type="text"
-
-id="search"
-
-placeholder="🔍 Rechercher un produit..."
-
-onkeyup="searchProducts()"
-
-
->
-
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Rechercher un produit..."
+        onkeyup="searchProducts()"
+    >
 
 </div>
 
 
 
-
-
-<!-- CATEGORIES -->
-
+<!-- =========================
+     FILTRES CATEGORIES
+========================= -->
 
 <div class="filters">
 
+    <button onclick="filterProducts('all')">
+        Tous
+    </button>
 
-<button onclick="filterProducts('all')">
+    <button onclick="filterProducts('vetements')">
+        👕 Vêtements
+    </button>
 
-Tous
+    <button onclick="filterProducts('shoes')">
+        👟 Shoes
+    </button>
 
-</button>
-
-
-
-<button onclick="filterProducts('vetements')">
-
-👕 Vêtements
-
-</button>
-
-
-
-<button onclick="filterProducts('shoes')">
-
-👟 Shoes
-
-</button>
-
-
-
-<button onclick="filterProducts('accessoires')">
-
-🧢 Accessoires
-
-</button>
-
-
+    <button onclick="filterProducts('accessoires')">
+        🧢 Accessoires
+    </button>
 
 </div>
 
 
 
-
-
-
-
+<!-- =========================
+     CONTENU PRINCIPAL
+========================= -->
 
 <main>
 
 
+    <!-- =========================
+         PRODUITS
+    ========================= -->
 
-<section class="products">
+    <section class="products">
 
 
+        <!-- T-SHIRT -->
 
+        <div
+            class="product"
+            data-category="vetements"
+        >
 
+            <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
+                alt="T-shirt Premium"
+            >
 
-<!-- PRODUIT 1 -->
+            <div class="product-content">
 
+                <h3>
+                    T-shirt Premium
+                </h3>
 
-<div class="product" data-category="vetements">
+                <div class="price">
+                    20 €
+                </div>
 
+                <div class="qty-container">
 
-<img
+                    <label for="qty-tshirt">
+                        Quantité
+                    </label>
 
-src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
+                    <input
+                        type="number"
+                        id="qty-tshirt"
+                        value="1"
+                        min="1"
+                        max="99"
+                    >
 
-alt="T-shirt Premium"
+                </div>
 
->
+                <button
+                    onclick="addToCart('T-shirt Premium',20,'tshirt')"
+                >
+                    Ajouter au panier
+                </button>
 
+            </div>
 
-<div class="product-content">
+        </div>
 
 
-<h3>
-T-shirt Premium
-</h3>
 
+        <!-- CASQUETTE -->
 
+        <div
+            class="product"
+            data-category="accessoires"
+        >
 
-<div class="price">
-20 €
-</div>
+            <img
+                src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80"
+                alt="Casquette"
+            >
 
+            <div class="product-content">
 
+                <h3>
+                    Casquette
+                </h3>
 
-<div class="qty-container">
+                <div class="price">
+                    15 €
+                </div>
 
+                <div class="qty-container">
 
-<label>
-Quantité
-</label>
+                    <label for="qty-casquette">
+                        Quantité
+                    </label>
 
+                    <input
+                        type="number"
+                        id="qty-casquette"
+                        value="1"
+                        min="1"
+                        max="99"
+                    >
 
-<input
+                </div>
 
-type="number"
+                <button
+                    onclick="addToCart('Casquette',15,'casquette')"
+                >
+                    Ajouter au panier
+                </button>
 
-id="qty-tshirt"
+            </div>
 
-value="1"
+        </div>
 
-min="1"
 
-max="99"
 
->
+        <!-- SNEAKERS -->
 
+        <div
+            class="product"
+            data-category="shoes"
+        >
 
-</div>
+            <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+                alt="Sneakers"
+            >
 
+            <div class="product-content">
 
+                <h3>
+                    Sneakers
+                </h3>
 
-<button onclick="addToCart('T-shirt Premium',20,'tshirt')">
+                <div class="price">
+                    60 €
+                </div>
 
-Ajouter au panier
+                <div class="qty-container">
 
-</button>
+                    <label for="qty-sneakers">
+                        Quantité
+                    </label>
 
+                    <input
+                        type="number"
+                        id="qty-sneakers"
+                        value="1"
+                        min="1"
+                        max="99"
+                    >
 
-</div>
+                </div>
 
+                <button
+                    onclick="addToCart('Sneakers',60,'sneakers')"
+                >
+                    Ajouter au panier
+                </button>
 
-</div>
+            </div>
 
+        </div>
 
 
+    </section>
 
 
 
+    <!-- =========================
+         PANIER
+    ========================= -->
 
+    <aside class="cart-box">
 
+        <h2>
+            🧺 Votre panier
+        </h2>
 
-<!-- PRODUIT 2 -->
+        <ul id="cart-items">
+        </ul>
 
+        <div class="total">
 
-<div class="product" data-category="accessoires">
+            Total :
 
+            <span id="total">
+                0.00
+            </span>
 
-<img
+            €
 
-src="https://images.unsplash.com/photo-1521369909029-2afed882baee"
+        </div>
 
-alt="Casquette"
+        <button
+            class="clear-btn"
+            onclick="clearCart()"
+        >
+            🗑️ Vider le panier
+        </button>
 
->
+        <button
+            class="pay-btn"
+            onclick="goToCheckout()"
+        >
+            💳 Commander
+        </button>
 
-
-
-<div class="product-content">
-
-
-<h3>
-Casquette
-</h3>
-
-
-
-<div class="price">
-15 €
-</div>
-
-
-
-
-<div class="qty-container">
-
-
-<label>
-Quantité
-</label>
-
-
-<input
-
-type="number"
-
-id="qty-casquette"
-
-value="1"
-
-min="1"
-
-max="99"
-
->
-
-
-
-</div>
-
-
-
-
-<button onclick="addToCart('Casquette',15,'casquette')">
-
-Ajouter au panier
-
-</button>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- PRODUIT 3 -->
-
-
-<div class="product" data-category="shoes">
-
-
-<img
-
-src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-
-alt="Sneakers"
-
->
-
-
-
-<div class="product-content">
-
-
-<h3>
-Sneakers
-</h3>
-
-
-
-<div class="price">
-
-60 €
-
-</div>
-
-
-
-
-<div class="qty-container">
-
-
-<label>
-
-Quantité
-
-</label>
-
-
-<input
-
-type="number"
-
-id="qty-sneakers"
-
-value="1"
-
-min="1"
-
-max="99"
-
->
-
-
-</div>
-
-
-
-
-<button onclick="addToCart('Sneakers',60,'sneakers')">
-
-Ajouter au panier
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- PANIER -->
-
-
-<aside class="cart-box">
-
-
-<h2>
-🧺 Votre panier
-</h2>
-
-
-
-<ul id="cart-items">
-
-</ul>
-
-
-
-
-<div class="total">
-
-Total :
-
-<span id="total">
-
-0.00
-
-</span>
-
-€
-
-</div>
-
-
-
-
-
-<button
-
-class="clear-btn"
-
-onclick="clearCart()"
-
->
-
-🗑️ Vider le panier
-
-</button>
-
-
-
-
-
-<button
-
-class="pay-btn"
-
-onclick="goToCheckout()"
-
->
-
-💳 Commander
-
-</button>
-
-
-
-</aside>
-
+    </aside>
 
 
 </main>
 
 
 
+<!-- =========================
+     PIED DE PAGE
+========================= -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            🛍️ Ma Boutique
+        </div>
+
+        <p>
+            © 2026 Ma Boutique — Tous droits réservés.
+        </p>
+
+        <nav class="footer-links">
+
+            <a href="mentions-legales.html">
+                Mentions légales
+            </a>
+
+            <a href="cgv.html">
+                Conditions générales de vente
+            </a>
+
+            <a href="rgpd.html">
+                Politique de confidentialité / RGPD
+            </a>
+
+        </nav>
+
+    </div>
+
+</footer>
 
 
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script src="app.js"></script>
 
@@ -471,3 +358,4 @@ onclick="goToCheckout()"
 </body>
 
 </html>
+
